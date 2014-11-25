@@ -1,0 +1,19 @@
+//
+//  PrefixHeader.pch
+//  WordList
+//
+//  Created by HuangPeng on 11/25/14.
+//  Copyright (c) 2014 Beacon. All rights reserved.
+//
+
+#ifndef WordList_PrefixHeader_pch
+#define WordList_PrefixHeader_pch
+
+#import "CoreData.h"
+#import "Word.h"
+#import "WordDB.h"
+
+#import "Utility.h"
+#import "UIView+Utility.h"
+
+#endif

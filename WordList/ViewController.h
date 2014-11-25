@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "OCTableViewController.h"
 
-@interface ViewController : UIViewController
+@interface ViewController : OCTableViewController
 
 
 @end

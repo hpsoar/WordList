@@ -66,6 +66,7 @@
 		12C355981A24E78000B247DF /* NITableViewActions.m in Sources */ = {isa = PBXBuildFile; fileRef = 12C3558D1A24E78000B247DF /* NITableViewActions.m */; };
 		12C355991A24E78000B247DF /* NITableViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 12C355901A24E78000B247DF /* NITableViewModel.m */; };
 		12C3559C1A24E7AD00B247DF /* WordItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 12C3559B1A24E7AD00B247DF /* WordItem.m */; };
+		12C355A41A261A3E00B247DF /* Word+Utility.m in Sources */ = {isa = PBXBuildFile; fileRef = 12C355A31A261A3E00B247DF /* Word+Utility.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -207,6 +208,8 @@
 		12C355901A24E78000B247DF /* NITableViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NITableViewModel.m; sourceTree = "<group>"; };
 		12C3559A1A24E7AD00B247DF /* WordItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WordItem.h; sourceTree = "<group>"; };
 		12C3559B1A24E7AD00B247DF /* WordItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WordItem.m; sourceTree = "<group>"; };
+		12C355A21A261A3E00B247DF /* Word+Utility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Word+Utility.h"; sourceTree = "<group>"; };
+		12C355A31A261A3E00B247DF /* Word+Utility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Word+Utility.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -267,6 +270,8 @@
 				12C3550E1A24D56E00B247DF /* Word.m */,
 				12C3559A1A24E7AD00B247DF /* WordItem.h */,
 				12C3559B1A24E7AD00B247DF /* WordItem.m */,
+				12C355A21A261A3E00B247DF /* Word+Utility.h */,
+				12C355A31A261A3E00B247DF /* Word+Utility.m */,
 			);
 			path = WordList;
 			sourceTree = "<group>";
@@ -576,6 +581,7 @@
 				1261A3441A23890200B222F5 /* AFURLResponseSerialization.m in Sources */,
 				12C355731A24E4CC00B247DF /* UIResponder+NimbusCore.m in Sources */,
 				12C355941A24E78000B247DF /* NIFormCellCatalog.m in Sources */,
+				12C355A41A261A3E00B247DF /* Word+Utility.m in Sources */,
 				1261A3421A23890200B222F5 /* AFURLConnectionOperation.m in Sources */,
 				1261A3411A23890200B222F5 /* AFSecurityPolicy.m in Sources */,
 				12C355081A24CE1700B247DF /* CoreData.m in Sources */,

@@ -19,7 +19,12 @@
 - (NSURL *)applicationDocumentsDirectory;
 
 - (id)insertObjectForEntityWithName:(NSString *)name;
+- (void)deleteObject:(id)object;
 
 - (id)entityWithName:(NSString *)name;
+
+- (id)queryOneFromEntityWithName:(NSString *)name withPredicate:(NSPredicate *)predicate;
+
+- (NSArray *)queryFromEntityWithName:(NSString *)name withPredicate:(NSPredicate *)predicate;
 
 @end

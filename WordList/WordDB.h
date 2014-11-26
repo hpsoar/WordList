@@ -13,6 +13,10 @@
 
 + (Word *)insertWord;
 
++ (void)deleteWord:(Word *)word;
+
++ (Word *)word:(NSString *)text;
+
 + (void)save;
 
 @end

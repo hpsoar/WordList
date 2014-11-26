@@ -114,4 +114,30 @@
     return [NSEntityDescription insertNewObjectForEntityForName:name inManagedObjectContext:self.managedObjectContext];
 }
 
+- (void)deleteObject:(id)object {
+    [self.managedObjectContext deleteObject:object];
+}
+
+- (NSArray *)queryFromEntityWithName:(NSString *)name withPredicate:(NSPredicate *)predicate {
+    NSFetchRequest *fetch = [NSFetchRequest fetchRequestWithEntityName:name];
+    [fetch setPredicate:predicate];
+    
+    NSError *error = nil;
+    NSArray *results = [[self managedObjectContext] executeFetchRequest:fetch error:&error];
+    if (error) {
+        return nil;
+    }
+    else {
+        return results;
+    }
+}
+
+- (id)queryOneFromEntityWithName:(NSString *)name withPredicate:(NSPredicate *)predicate {
+    NSArray *results = [self queryFromEntityWithName:name withPredicate:predicate];
+    if (results.count > 0) {
+        return results.firstObject;
+    }
+    return nil;
+}
+
 @end

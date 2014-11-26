@@ -10,10 +10,12 @@
 
 @interface WordItem : NICellObject
 
-- (id)initWithWord:(Word *)word;
+@property (nonatomic, strong) NSString *word;
+@property (nonatomic, strong) NSString *definition;
+@property (nonatomic, strong) NSString *phonetic;
 
-@property (nonatomic, readonly) Word *word;
-@property (nonatomic) BOOL inWordbook;
+@property (nonatomic) BOOL favored;
+
 @end
 
 @interface WordItemCell : UITableViewCell <NICell>

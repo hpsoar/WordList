@@ -25,6 +25,15 @@ static NSString *wordEntityName = @"WordList";
     return [self.db insertObjectForEntityWithName:wordEntityName];
 }
 
++ (void)deleteWord:(Word *)word {
+    [self.db deleteObject:word];
+}
+
++ (Word *)word:(NSString *)text {
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"word = %@", text];
+    return [self.db queryOneFromEntityWithName:wordEntityName withPredicate:predicate];
+}
+
 + (void)save {
     [self.db saveContext];
 }

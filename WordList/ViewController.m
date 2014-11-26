@@ -50,11 +50,8 @@ NSString* const kYoudaokey      = @"482091942";
 
 - (void)updateModelWithWordList:(NSArray *)wordList {
     [self resetModel];
-    NSMutableArray *items = [[NSMutableArray alloc] initWithCapacity:wordList.count];
-    for (Word *word in wordList) {
-        [items addObject:[[WordItem alloc] initWithWord:word]];
-    }
-    [self.model addObjectsFromArray:items];
+
+    [self.model addObjectsFromArray:wordList];
     
     [self reloadTableView];
 }
@@ -88,30 +85,26 @@ NSString* const kYoudaokey      = @"482091942";
         NSString *ukPhonetic = basic[@"uk-phonetic"];
         NSString *usPhonetic = basic[@"us-phonetic"];
         
-        Word *word = [WordDB insertWord];
-        word.word = query;
-        word.phonetic = phontic;
-        word.usPhonetic = usPhonetic;
-        word.ukPhonetic = ukPhonetic;
+        WordItem *item = [WordItem new];
+        item.word = query;
+        item.phonetic = phontic;
         if (explains.count > 0) {
-            word.meanings = [explains componentsJoinedByString:@"\n"];
+            item.definition = [explains componentsJoinedByString:@"\n"];
         }
         else {
-            word.meanings = [translations componentsJoinedByString:@"\n"];
+            item.definition = [translations componentsJoinedByString:@"\n"];
         }
-        [WordDB save];
-        [results addObject:word];
+        [results addObject:item];
         
         for (NSDictionary *dict in json[@"web"]) {
             NSString *key = dict[@"key"];
             NSArray *value = dict[@"value"];
-            Word *word = [WordDB insertWord];
-            word.word = key;
-            word.meanings = [value componentsJoinedByString:@"\n"];
+            WordItem *item = [WordItem new];
+            item.word = key;
+            item.definition = [value componentsJoinedByString:@"\n"];
             
-            [results addObject:word];
+            [results addObject:item];
         }
-        [WordDB save];
     }
     
     return results;

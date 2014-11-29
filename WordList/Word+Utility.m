@@ -10,12 +10,8 @@
 
 @implementation Word (Utility)
 
-- (void)copyValues:(Word *)word {
-    self.word = word.word;
-    self.phonetic = word.phonetic;
-    self.usPhonetic = word.usPhonetic;
-    self.ukPhonetic = word.ukPhonetic;
-    self.meanings = word.meanings;
+- (NSString *)firstLetter {
+    return [[self.word substringToIndex:1] uppercaseString];
 }
 
 @end

@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		121E92D11A28C45400A41E92 /* CoreData.m in Sources */ = {isa = PBXBuildFile; fileRef = 121E92D01A28C45400A41E92 /* CoreData.m */; };
+		121E92DB1A29D02F00A41E92 /* Word.m in Sources */ = {isa = PBXBuildFile; fileRef = 121E92DA1A29D02F00A41E92 /* Word.m */; };
 		1261A3051A2385A200B222F5 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 1261A3041A2385A200B222F5 /* main.m */; };
 		1261A3081A2385A200B222F5 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1261A3071A2385A200B222F5 /* AppDelegate.m */; };
 		1261A30B1A2385A200B222F5 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1261A30A1A2385A200B222F5 /* ViewController.m */; };
@@ -23,9 +25,7 @@
 		1261A3441A23890200B222F5 /* AFURLResponseSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = 1261A33A1A23890200B222F5 /* AFURLResponseSerialization.m */; };
 		1261A3451A23890200B222F5 /* AFURLSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1261A33C1A23890200B222F5 /* AFURLSessionManager.m */; };
 		126AC42E1A24C8FE0053ED98 /* WordList.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 126AC42C1A24C8FE0053ED98 /* WordList.xcdatamodeld */; };
-		12C355081A24CE1700B247DF /* CoreData.m in Sources */ = {isa = PBXBuildFile; fileRef = 12C355071A24CE1700B247DF /* CoreData.m */; };
 		12C3550C1A24D1C600B247DF /* WordDB.m in Sources */ = {isa = PBXBuildFile; fileRef = 12C3550B1A24D1C600B247DF /* WordDB.m */; };
-		12C3550F1A24D56E00B247DF /* Word.m in Sources */ = {isa = PBXBuildFile; fileRef = 12C3550E1A24D56E00B247DF /* Word.m */; };
 		12C3551D1A24E2D600B247DF /* Macros.m in Sources */ = {isa = PBXBuildFile; fileRef = 12C355121A24E2D600B247DF /* Macros.m */; };
 		12C3551E1A24E2D600B247DF /* RefreshTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 12C355141A24E2D600B247DF /* RefreshTableViewController.m */; };
 		12C3551F1A24E2D600B247DF /* UIImage+BlurredFrame.m in Sources */ = {isa = PBXBuildFile; fileRef = 12C355161A24E2D600B247DF /* UIImage+BlurredFrame.m */; };
@@ -67,6 +67,7 @@
 		12C355991A24E78000B247DF /* NITableViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 12C355901A24E78000B247DF /* NITableViewModel.m */; };
 		12C3559C1A24E7AD00B247DF /* WordItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 12C3559B1A24E7AD00B247DF /* WordItem.m */; };
 		12C355A41A261A3E00B247DF /* Word+Utility.m in Sources */ = {isa = PBXBuildFile; fileRef = 12C355A31A261A3E00B247DF /* Word+Utility.m */; };
+		12C355A71A2637F300B247DF /* WordListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 12C355A61A2637F300B247DF /* WordListViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -80,6 +81,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		121E92CF1A28C45400A41E92 /* CoreData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreData.h; sourceTree = "<group>"; };
+		121E92D01A28C45400A41E92 /* CoreData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoreData.m; sourceTree = "<group>"; };
+		121E92D21A29C4BA00A41E92 /* WordList.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = WordList.entitlements; sourceTree = "<group>"; };
+		121E92D91A29D02F00A41E92 /* Word.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Word.h; sourceTree = "<group>"; };
+		121E92DA1A29D02F00A41E92 /* Word.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Word.m; sourceTree = "<group>"; };
 		1261A2FF1A2385A200B222F5 /* WordList.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WordList.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1261A3031A2385A200B222F5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1261A3041A2385A200B222F5 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -112,13 +118,9 @@
 		1261A33B1A23890200B222F5 /* AFURLSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFURLSessionManager.h; sourceTree = "<group>"; };
 		1261A33C1A23890200B222F5 /* AFURLSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFURLSessionManager.m; sourceTree = "<group>"; };
 		126AC42D1A24C8FE0053ED98 /* WordList.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = WordList.xcdatamodel; sourceTree = "<group>"; };
-		12C355061A24CE1700B247DF /* CoreData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreData.h; sourceTree = "<group>"; };
-		12C355071A24CE1700B247DF /* CoreData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoreData.m; sourceTree = "<group>"; };
 		12C355091A24D02B00B247DF /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		12C3550A1A24D1C600B247DF /* WordDB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WordDB.h; sourceTree = "<group>"; };
 		12C3550B1A24D1C600B247DF /* WordDB.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WordDB.m; sourceTree = "<group>"; };
-		12C3550D1A24D56E00B247DF /* Word.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Word.h; path = ../Word.h; sourceTree = "<group>"; };
-		12C3550E1A24D56E00B247DF /* Word.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Word.m; path = ../Word.m; sourceTree = "<group>"; };
 		12C355111A24E2D600B247DF /* Macros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Macros.h; sourceTree = "<group>"; };
 		12C355121A24E2D600B247DF /* Macros.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Macros.m; sourceTree = "<group>"; };
 		12C355131A24E2D600B247DF /* RefreshTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RefreshTableViewController.h; sourceTree = "<group>"; };
@@ -210,6 +212,8 @@
 		12C3559B1A24E7AD00B247DF /* WordItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WordItem.m; sourceTree = "<group>"; };
 		12C355A21A261A3E00B247DF /* Word+Utility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Word+Utility.h"; sourceTree = "<group>"; };
 		12C355A31A261A3E00B247DF /* Word+Utility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Word+Utility.m"; sourceTree = "<group>"; };
+		12C355A51A2637F300B247DF /* WordListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WordListViewController.h; sourceTree = "<group>"; };
+		12C355A61A2637F300B247DF /* WordListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WordListViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -253,6 +257,7 @@
 		1261A3011A2385A200B222F5 /* WordList */ = {
 			isa = PBXGroup;
 			children = (
+				121E92D21A29C4BA00A41E92 /* WordList.entitlements */,
 				1261A3061A2385A200B222F5 /* AppDelegate.h */,
 				1261A3071A2385A200B222F5 /* AppDelegate.m */,
 				1261A3091A2385A200B222F5 /* ViewController.h */,
@@ -261,17 +266,17 @@
 				1261A3111A2385A200B222F5 /* LaunchScreen.xib */,
 				1261A3021A2385A200B222F5 /* Supporting Files */,
 				126AC42C1A24C8FE0053ED98 /* WordList.xcdatamodeld */,
-				12C355061A24CE1700B247DF /* CoreData.h */,
-				12C355071A24CE1700B247DF /* CoreData.m */,
+				121E92D91A29D02F00A41E92 /* Word.h */,
+				121E92DA1A29D02F00A41E92 /* Word.m */,
 				12C355091A24D02B00B247DF /* PrefixHeader.pch */,
 				12C3550A1A24D1C600B247DF /* WordDB.h */,
 				12C3550B1A24D1C600B247DF /* WordDB.m */,
-				12C3550D1A24D56E00B247DF /* Word.h */,
-				12C3550E1A24D56E00B247DF /* Word.m */,
 				12C3559A1A24E7AD00B247DF /* WordItem.h */,
 				12C3559B1A24E7AD00B247DF /* WordItem.m */,
 				12C355A21A261A3E00B247DF /* Word+Utility.h */,
 				12C355A31A261A3E00B247DF /* Word+Utility.m */,
+				12C355A51A2637F300B247DF /* WordListViewController.h */,
+				12C355A61A2637F300B247DF /* WordListViewController.m */,
 			);
 			path = WordList;
 			sourceTree = "<group>";
@@ -342,6 +347,8 @@
 		12C355101A24E2D600B247DF /* OCKit */ = {
 			isa = PBXGroup;
 			children = (
+				121E92CF1A28C45400A41E92 /* CoreData.h */,
+				121E92D01A28C45400A41E92 /* CoreData.m */,
 				12C355771A24E72200B247DF /* OCTableViewController.h */,
 				12C355781A24E72200B247DF /* OCTableViewController.m */,
 				12C355111A24E2D600B247DF /* Macros.h */,
@@ -499,6 +506,12 @@
 				TargetAttributes = {
 					1261A2FE1A2385A200B222F5 = {
 						CreatedOnToolsVersion = 6.1;
+						DevelopmentTeam = 2Q6A52H492;
+						SystemCapabilities = {
+							com.apple.iCloud = {
+								enabled = 1;
+							};
+						};
 					};
 					1261A3171A2385A200B222F5 = {
 						CreatedOnToolsVersion = 6.1;
@@ -577,6 +590,7 @@
 				12C3551D1A24E2D600B247DF /* Macros.m in Sources */,
 				12C355931A24E78000B247DF /* NICellFactory.m in Sources */,
 				12C3550C1A24D1C600B247DF /* WordDB.m in Sources */,
+				121E92D11A28C45400A41E92 /* CoreData.m in Sources */,
 				12C3556E1A24E4CC00B247DF /* NIRuntimeClassModifications.m in Sources */,
 				1261A3441A23890200B222F5 /* AFURLResponseSerialization.m in Sources */,
 				12C355731A24E4CC00B247DF /* UIResponder+NimbusCore.m in Sources */,
@@ -584,13 +598,12 @@
 				12C355A41A261A3E00B247DF /* Word+Utility.m in Sources */,
 				1261A3421A23890200B222F5 /* AFURLConnectionOperation.m in Sources */,
 				1261A3411A23890200B222F5 /* AFSecurityPolicy.m in Sources */,
-				12C355081A24CE1700B247DF /* CoreData.m in Sources */,
 				1261A33F1A23890200B222F5 /* AFHTTPSessionManager.m in Sources */,
 				1261A3431A23890200B222F5 /* AFURLRequestSerialization.m in Sources */,
 				12C355791A24E72200B247DF /* OCTableViewController.m in Sources */,
 				1261A3451A23890200B222F5 /* AFURLSessionManager.m in Sources */,
-				12C3550F1A24D56E00B247DF /* Word.m in Sources */,
 				12C355201A24E2D600B247DF /* UIImage+ImageEffects.m in Sources */,
+				121E92DB1A29D02F00A41E92 /* Word.m in Sources */,
 				1261A3081A2385A200B222F5 /* AppDelegate.m in Sources */,
 				12C355971A24E78000B247DF /* NIRadioGroupController.m in Sources */,
 				12C355221A24E2D600B247DF /* Utility.m in Sources */,
@@ -599,6 +612,7 @@
 				1261A3051A2385A200B222F5 /* main.m in Sources */,
 				12C355651A24E4CC00B247DF /* NIFoundationMethods.m in Sources */,
 				12C355211A24E2D600B247DF /* UIView+Utility.m in Sources */,
+				12C355A71A2637F300B247DF /* WordListViewController.m in Sources */,
 				12C3551E1A24E2D600B247DF /* RefreshTableViewController.m in Sources */,
 				12C3555E1A24E4CC00B247DF /* NIActions.m in Sources */,
 				12C3556F1A24E4CC00B247DF /* NISDKAvailability.m in Sources */,
@@ -719,11 +733,16 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = WordList/WordList.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = WordList/PrefixHeader.pch;
 				INFOPLIST_FILE = WordList/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -731,11 +750,16 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = WordList/WordList.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = WordList/PrefixHeader.pch;
 				INFOPLIST_FILE = WordList/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};

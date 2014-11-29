@@ -8,15 +8,20 @@
 
 #import "CoreData.h"
 #import "Word.h"
+#import <CoreData/CoreData.h>
 
-@interface WordDB : NSObject
+@interface WordDB : CoreData
 
-+ (Word *)insertWord;
++ (instancetype)sharedDB;
 
-+ (void)deleteWord:(Word *)word;
+- (Word *)insertWord;
 
-+ (Word *)word:(NSString *)text;
+- (void)deleteWord:(Word *)word;
 
-+ (void)save;
+- (Word *)word:(NSString *)text;
+
+- (NSFetchRequest *)fetchRequest;
+
+- (NSFetchedResultsController *)fetchedResultsControllerSectioned:(BOOL)sectioned;
 
 @end

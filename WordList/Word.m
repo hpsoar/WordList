@@ -2,7 +2,7 @@
 //  Word.m
 //  WordList
 //
-//  Created by HuangPeng on 11/25/14.
+//  Created by HuangPeng on 11/29/14.
 //  Copyright (c) 2014 Beacon. All rights reserved.
 //
 

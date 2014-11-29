@@ -14,7 +14,7 @@
 
 - (void)setWord:(NSString *)word {
     _word = word;
-    _w = [WordDB word:_word];
+    _w = [[WordDB sharedDB] word:word];
 }
 
 - (BOOL)favored {
@@ -24,16 +24,16 @@
 - (void)setFavored:(BOOL)favored {
     if (favored) {
         if (_w == nil) {
-            _w = [WordDB insertWord];
+            _w = [[WordDB sharedDB] insertWord];
             _w.word = self.word;
             _w.phonetic = self.phonetic;
             _w.meanings = self.definition;
-            [WordDB save];
+            [[WordDB sharedDB] saveContext];
         }
     }
     else if (_w) {
-        [WordDB deleteWord:_w];
-        [WordDB save];
+        [[WordDB sharedDB] deleteWord:_w];
+        [[WordDB sharedDB] saveContext];
         _w = nil;
     }
 }

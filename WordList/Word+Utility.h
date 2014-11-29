@@ -10,6 +10,6 @@
 
 @interface Word (Utility)
 
-- (void)copyValues:(Word*)word;
+@property (nonatomic, readonly) NSString *firstLetter;
 
 @end

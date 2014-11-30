@@ -19,8 +19,6 @@
     
     self.title = @"Word List";
     
-    self.navigationController.navigationBar.topItem.title = @"";
-    
     NSError *error;
     [self.fetchedResultsController performFetch:&error];
     [self.tableView reloadData];
@@ -59,7 +57,7 @@
     Word *word = [self.fetchedResultsController objectAtIndexPath:indexPath];
     
     cell.textLabel.text = word.word;
-    cell.detailTextLabel.text = [word.meanings stringByReplacingOccurrencesOfString:@"\n" withString:@";"];
+    cell.detailTextLabel.text = [word.definitions stringByReplacingOccurrencesOfString:@"\n" withString:@";"];
     
     return cell;
 }

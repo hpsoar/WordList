@@ -2,19 +2,21 @@
 //  Word.m
 //  WordList
 //
-//  Created by HuangPeng on 11/29/14.
+//  Created by HuangPeng on 11/30/14.
 //  Copyright (c) 2014 Beacon. All rights reserved.
 //
 
 #import "Word.h"
+#import "Review.h"
 
 
 @implementation Word
 
-@dynamic meanings;
+@dynamic definitions;
 @dynamic phonetic;
 @dynamic ukPhonetic;
 @dynamic usPhonetic;
 @dynamic word;
+@dynamic review;
 
 @end

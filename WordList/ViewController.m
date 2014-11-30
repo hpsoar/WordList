@@ -10,6 +10,7 @@
 #import "AFHTTPSessionManager.h"
 #import "WordItem.h"
 #import "WordListViewController.h"
+#import "ReviewWordViewController.h"
 
 @protocol WordEditingActionViewDelegate <NSObject>
 
@@ -33,10 +34,17 @@
 - (id)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
-        NSArray *titles = @[@"1", @"2", @"R", @"E", @"P" ];
+        self.backgroundColor = [UIColor whiteColor];
         
-        _bigPasteBtn = [self btnWithXOffset:20 width:self.width - 40 title:@"Paste" color:[UIColor redColor]];
-        _bigPasteBtn.tag = titles.count - 1;
+        NSArray *titles = @[@"1", @"2", @"P", @"E", @"R" ];
+        CGFloat size = 48;
+        
+        _bigPasteBtn = [self btnWithXOffset:20
+                                      width:self.width - 40
+                                     height:size
+                                      title:@"Paste to query"
+                                      color:[UIColor redColor]];
+        _bigPasteBtn.tag = 2;
         [self addSubview:_bigPasteBtn];
         
         _container = [[UIView alloc] initWithFrame:self.bounds];
@@ -45,13 +53,14 @@
         
         UIColor *red = [UIColor redColor];
         UIColor *gray = RGBCOLOR_HEX(0xf1c40f);
-        CGFloat xOffset = (self.width - titles.count * 44 - MAX(0, titles.count - 1) * 10) / 2;
+        CGFloat xOffset = (self.width - titles.count * size - MAX(0, titles.count - 1) * 10) / 2;
         
         for (int i = 0; i < titles.count; ++i) {
             UIButton *btn = [self btnWithXOffset:xOffset
-                                           width:44
+                                           width:size
+                                          height:size
                                            title:titles[i]
-                                           color:i + 1 < titles.count ? gray : red ];
+                                           color:i != 2 ? gray : red ];
             xOffset += btn.width + 10;
             btn.tag = i;
             
@@ -62,8 +71,8 @@
     return self;
 }
 
-- (UIButton *)btnWithXOffset:(CGFloat)xOffset width:(CGFloat)width title:(NSString *)title color:(UIColor *)color {
-    UIButton *btn = [[UIButton alloc] initWithFrame:CGRectMake(xOffset, 8, width, 44)];
+- (UIButton *)btnWithXOffset:(CGFloat)xOffset width:(CGFloat)width height:(CGFloat)height title:(NSString *)title color:(UIColor *)color {
+    UIButton *btn = [[UIButton alloc] initWithFrame:CGRectMake(xOffset, 9, width, height)];
     [btn setTitle:title forState:UIControlStateNormal];
     btn.backgroundColor = color;
     
@@ -85,13 +94,13 @@
             if (self.word.length < 3) return;
             _editedWord = [self.word substringToIndex:self.word.length - 2];
             break;
-        case 2:
+        case 4:
             if ([self.editedWord isEqualToString:self.word]) {
                 return;
             }
             _editedWord = self.word;
             break;
-        case 4: {
+        case 2: {
             NSString *word = [UIPasteboard generalPasteboard].string;
             if ([_editedWord isEqualToString:word]) {
                 return;
@@ -148,9 +157,12 @@ NSString* const kYoudaokey      = @"482091942";
    
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemBookmarks target:self action:@selector(showWordbook)];
     
-    self.editingView = [[WordEditingActionView alloc] initWithFrame:CGRectMake(0, 0, self.view.width, 60)];
+    self.editingView = [[WordEditingActionView alloc] initWithFrame:CGRectMake(0, 0, self.view.width, 66)];
     self.editingView.delegate = self;
-    self.tableView.tableHeaderView = self.editingView;
+    
+    [self.view addSubview:self.editingView];
+    
+    self.tableView.frame = NIRectContract(self.tableView.frame, 0, self.editingView.height);
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -160,6 +172,12 @@ NSString* const kYoudaokey      = @"482091942";
 - (void)loadView {
     [super loadView];
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+}
+
+- (void)viewWillLayoutSubviews {
+    [super viewWillLayoutSubviews];
+    
+    self.editingView.top = self.tableView.bottom;
 }
 
 - (void)updateModelWithWordList:(NSArray *)wordList {
@@ -230,7 +248,8 @@ NSString* const kYoudaokey      = @"482091942";
 }
 
 - (void)search {
-    
+    ReviewWordViewController *controller = [ReviewWordViewController new];
+    [self.navigationController pushViewController:controller animated:YES];
 }
 
 - (void)showWordbook {

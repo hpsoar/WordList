@@ -27,7 +27,7 @@
             _w = [[WordDB sharedDB] insertWord];
             _w.word = self.word;
             _w.phonetic = self.phonetic;
-            _w.meanings = self.definition;
+            _w.definitions = self.definition;
             [[WordDB sharedDB] saveContext];
         }
     }

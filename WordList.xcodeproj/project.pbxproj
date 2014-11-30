@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		121E92D11A28C45400A41E92 /* CoreData.m in Sources */ = {isa = PBXBuildFile; fileRef = 121E92D01A28C45400A41E92 /* CoreData.m */; };
-		121E92DB1A29D02F00A41E92 /* Word.m in Sources */ = {isa = PBXBuildFile; fileRef = 121E92DA1A29D02F00A41E92 /* Word.m */; };
 		1261A3051A2385A200B222F5 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 1261A3041A2385A200B222F5 /* main.m */; };
 		1261A3081A2385A200B222F5 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1261A3071A2385A200B222F5 /* AppDelegate.m */; };
 		1261A30B1A2385A200B222F5 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1261A30A1A2385A200B222F5 /* ViewController.m */; };
@@ -30,6 +29,9 @@
 		12B879DE1A2ACC7300022C70 /* easy-word-icon58.png in Resources */ = {isa = PBXBuildFile; fileRef = 12B879DA1A2ACC7300022C70 /* easy-word-icon58.png */; };
 		12B879DF1A2ACC7300022C70 /* easy-word-icon87.png in Resources */ = {isa = PBXBuildFile; fileRef = 12B879DB1A2ACC7300022C70 /* easy-word-icon87.png */; };
 		12B879E11A2ACCF400022C70 /* easy-word-icon80.png in Resources */ = {isa = PBXBuildFile; fileRef = 12B879E01A2ACCF400022C70 /* easy-word-icon80.png */; };
+		12B879E41A2AE0A700022C70 /* ReviewWordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 12B879E31A2AE0A700022C70 /* ReviewWordViewController.m */; };
+		12B879FA1A2B1AA700022C70 /* Word.m in Sources */ = {isa = PBXBuildFile; fileRef = 12B879F91A2B1AA700022C70 /* Word.m */; };
+		12B879FD1A2B237100022C70 /* Review.m in Sources */ = {isa = PBXBuildFile; fileRef = 12B879FC1A2B237100022C70 /* Review.m */; };
 		12C3550C1A24D1C600B247DF /* WordDB.m in Sources */ = {isa = PBXBuildFile; fileRef = 12C3550B1A24D1C600B247DF /* WordDB.m */; };
 		12C3551D1A24E2D600B247DF /* Macros.m in Sources */ = {isa = PBXBuildFile; fileRef = 12C355121A24E2D600B247DF /* Macros.m */; };
 		12C3551E1A24E2D600B247DF /* RefreshTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 12C355141A24E2D600B247DF /* RefreshTableViewController.m */; };
@@ -89,8 +91,6 @@
 		121E92CF1A28C45400A41E92 /* CoreData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreData.h; sourceTree = "<group>"; };
 		121E92D01A28C45400A41E92 /* CoreData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoreData.m; sourceTree = "<group>"; };
 		121E92D21A29C4BA00A41E92 /* WordList.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = WordList.entitlements; sourceTree = "<group>"; };
-		121E92D91A29D02F00A41E92 /* Word.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Word.h; sourceTree = "<group>"; };
-		121E92DA1A29D02F00A41E92 /* Word.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Word.m; sourceTree = "<group>"; };
 		1261A2FF1A2385A200B222F5 /* WordList.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WordList.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1261A3031A2385A200B222F5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1261A3041A2385A200B222F5 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -128,6 +128,12 @@
 		12B879DA1A2ACC7300022C70 /* easy-word-icon58.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "easy-word-icon58.png"; sourceTree = "<group>"; };
 		12B879DB1A2ACC7300022C70 /* easy-word-icon87.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "easy-word-icon87.png"; sourceTree = "<group>"; };
 		12B879E01A2ACCF400022C70 /* easy-word-icon80.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "easy-word-icon80.png"; sourceTree = "<group>"; };
+		12B879E21A2AE0A700022C70 /* ReviewWordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReviewWordViewController.h; sourceTree = "<group>"; };
+		12B879E31A2AE0A700022C70 /* ReviewWordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReviewWordViewController.m; sourceTree = "<group>"; };
+		12B879F81A2B1AA700022C70 /* Word.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Word.h; sourceTree = "<group>"; };
+		12B879F91A2B1AA700022C70 /* Word.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Word.m; sourceTree = "<group>"; };
+		12B879FB1A2B237100022C70 /* Review.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Review.h; sourceTree = "<group>"; };
+		12B879FC1A2B237100022C70 /* Review.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Review.m; sourceTree = "<group>"; };
 		12C355091A24D02B00B247DF /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		12C3550A1A24D1C600B247DF /* WordDB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WordDB.h; sourceTree = "<group>"; };
 		12C3550B1A24D1C600B247DF /* WordDB.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WordDB.m; sourceTree = "<group>"; };
@@ -267,6 +273,7 @@
 		1261A3011A2385A200B222F5 /* WordList */ = {
 			isa = PBXGroup;
 			children = (
+				12B879EE1A2B19A800022C70 /* DB */,
 				12B879D71A2ACC7300022C70 /* Resources */,
 				121E92D21A29C4BA00A41E92 /* WordList.entitlements */,
 				1261A3061A2385A200B222F5 /* AppDelegate.h */,
@@ -276,18 +283,13 @@
 				1261A30F1A2385A200B222F5 /* Images.xcassets */,
 				1261A3111A2385A200B222F5 /* LaunchScreen.xib */,
 				1261A3021A2385A200B222F5 /* Supporting Files */,
-				126AC42C1A24C8FE0053ED98 /* WordList.xcdatamodeld */,
-				121E92D91A29D02F00A41E92 /* Word.h */,
-				121E92DA1A29D02F00A41E92 /* Word.m */,
 				12C355091A24D02B00B247DF /* PrefixHeader.pch */,
-				12C3550A1A24D1C600B247DF /* WordDB.h */,
-				12C3550B1A24D1C600B247DF /* WordDB.m */,
 				12C3559A1A24E7AD00B247DF /* WordItem.h */,
 				12C3559B1A24E7AD00B247DF /* WordItem.m */,
-				12C355A21A261A3E00B247DF /* Word+Utility.h */,
-				12C355A31A261A3E00B247DF /* Word+Utility.m */,
 				12C355A51A2637F300B247DF /* WordListViewController.h */,
 				12C355A61A2637F300B247DF /* WordListViewController.m */,
+				12B879E21A2AE0A700022C70 /* ReviewWordViewController.h */,
+				12B879E31A2AE0A700022C70 /* ReviewWordViewController.m */,
 			);
 			path = WordList;
 			sourceTree = "<group>";
@@ -365,6 +367,22 @@
 				12B879DB1A2ACC7300022C70 /* easy-word-icon87.png */,
 			);
 			path = Resources;
+			sourceTree = "<group>";
+		};
+		12B879EE1A2B19A800022C70 /* DB */ = {
+			isa = PBXGroup;
+			children = (
+				126AC42C1A24C8FE0053ED98 /* WordList.xcdatamodeld */,
+				12B879FB1A2B237100022C70 /* Review.h */,
+				12B879FC1A2B237100022C70 /* Review.m */,
+				12B879F81A2B1AA700022C70 /* Word.h */,
+				12B879F91A2B1AA700022C70 /* Word.m */,
+				12C355A21A261A3E00B247DF /* Word+Utility.h */,
+				12C355A31A261A3E00B247DF /* Word+Utility.m */,
+				12C3550A1A24D1C600B247DF /* WordDB.h */,
+				12C3550B1A24D1C600B247DF /* WordDB.m */,
+			);
+			name = DB;
 			sourceTree = "<group>";
 		};
 		12C355101A24E2D600B247DF /* OCKit */ = {
@@ -595,6 +613,7 @@
 				1261A33D1A23890200B222F5 /* AFHTTPRequestOperation.m in Sources */,
 				12C355701A24E4CC00B247DF /* NISnapshotRotation.m in Sources */,
 				12C355961A24E78000B247DF /* NIRadioGroup.m in Sources */,
+				12B879FA1A2B1AA700022C70 /* Word.m in Sources */,
 				126AC42E1A24C8FE0053ED98 /* WordList.xcdatamodeld in Sources */,
 				12C3556A1A24E4CC00B247DF /* NINonEmptyCollectionTesting.m in Sources */,
 				12C3556C1A24E4CC00B247DF /* NIOperations.m in Sources */,
@@ -618,10 +637,12 @@
 				12C3551D1A24E2D600B247DF /* Macros.m in Sources */,
 				12C355931A24E78000B247DF /* NICellFactory.m in Sources */,
 				12C3550C1A24D1C600B247DF /* WordDB.m in Sources */,
+				12B879FD1A2B237100022C70 /* Review.m in Sources */,
 				121E92D11A28C45400A41E92 /* CoreData.m in Sources */,
 				12C3556E1A24E4CC00B247DF /* NIRuntimeClassModifications.m in Sources */,
 				1261A3441A23890200B222F5 /* AFURLResponseSerialization.m in Sources */,
 				12C355731A24E4CC00B247DF /* UIResponder+NimbusCore.m in Sources */,
+				12B879E41A2AE0A700022C70 /* ReviewWordViewController.m in Sources */,
 				12C355941A24E78000B247DF /* NIFormCellCatalog.m in Sources */,
 				12C355A41A261A3E00B247DF /* Word+Utility.m in Sources */,
 				1261A3421A23890200B222F5 /* AFURLConnectionOperation.m in Sources */,
@@ -631,7 +652,6 @@
 				12C355791A24E72200B247DF /* OCTableViewController.m in Sources */,
 				1261A3451A23890200B222F5 /* AFURLSessionManager.m in Sources */,
 				12C355201A24E2D600B247DF /* UIImage+ImageEffects.m in Sources */,
-				121E92DB1A29D02F00A41E92 /* Word.m in Sources */,
 				1261A3081A2385A200B222F5 /* AppDelegate.m in Sources */,
 				12C355971A24E78000B247DF /* NIRadioGroupController.m in Sources */,
 				12C355221A24E2D600B247DF /* Utility.m in Sources */,

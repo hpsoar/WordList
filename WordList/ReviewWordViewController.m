@@ -55,7 +55,7 @@
     }
     else {
         _word = nil;
-        self.wordLabel.text = @"No more word to review";
+        self.wordLabel.text = @"复习完了～～～";
     }
 }
 
@@ -89,8 +89,9 @@
 
 @property (nonatomic, strong) UIView *buttonArea;
 
-@property (nonatomic, strong) NSArray *wordsToReview;
+@property (nonatomic, strong) NSMutableArray *wordsToReview;
 @property (nonatomic) NSInteger currentIndex;
+@property (nonatomic) BOOL firstRound;
 
 @end
 
@@ -141,31 +142,52 @@
     self.nextButton.left = 10;
     [self.buttonArea addSubview:self.nextButton];
     
-    self.wordsToReview = [[WordDB sharedDB] wordsToReview];
+    self.wordsToReview = [[[WordDB sharedDB] wordsToReview] mutableCopy];
 }
 
-- (void)setWordsToReview:(NSArray *)wordsToReview {
+- (void)setWordsToReview:(NSMutableArray *)wordsToReview {
     _wordsToReview = wordsToReview;
-    self.currentIndex = 0;
-}
-
-- (void)setCurrentIndex:(NSInteger)currentIndex {
-    if (currentIndex < self.wordsToReview.count) {
-        _currentIndex = currentIndex;
-        self.reviewBoardView.word = self.wordsToReview[_currentIndex];
-        
-        [self updateButtonsShowNextButton:NO withTag:0];
+    self.firstRound = YES;
+    
+    if (_wordsToReview.count > 0) {
+        self.currentIndex = 0;
     }
     else {
-        _currentIndex = NSNotFound;
         self.reviewBoardView.word = nil;
         [self updateButtonsShowNextButton:YES withTag:0];
     }
 }
 
-- (void)markRemember {
+- (void)setCurrentIndex:(NSInteger)currentIndex {
+    NIDASSERT(self.wordsToReview.count > 0);
+    if (self.wordsToReview.count <= 0) return;
     
-    self.currentIndex++;
+    if (currentIndex < self.wordsToReview.count) {
+        _currentIndex = currentIndex;
+    }
+    else {
+        self.firstRound = NO;
+        _currentIndex = 0;
+    }
+    self.reviewBoardView.word = self.wordsToReview[_currentIndex];
+    [self updateButtonsShowNextButton:NO withTag:0];
+}
+
+- (void)markRemember {
+    [[WordDB sharedDB] scheduleNextReviewTimeForWord:self.reviewBoardView.word remembered:self.firstRound];
+    [self.wordsToReview removeObject:self.reviewBoardView.word];
+    if (self.wordsToReview.count > 0) {
+        self.currentIndex = self.currentIndex;
+    }
+    else {
+        self.reviewBoardView.word = nil;
+        [self updateButtonsShowNextButton:YES withTag:0];
+    }
+}
+
+- (void)markNotRemember {
+    self.reviewBoardView.showDefinition = YES;
+    [self updateButtonsShowNextButton:YES withTag:1];
 }
 
 - (void)next:(id)sender {
@@ -175,18 +197,13 @@
     else {
         NSArray *wordsToReview = [[WordDB sharedDB] wordsToReview];
         if (wordsToReview.count > 0) {
-            self.wordsToReview = wordsToReview;
+            self.wordsToReview = [wordsToReview mutableCopy];
         }
         else {
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"remind" message:@"no more word" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
             [alert show];
         }
     }
-}
-
-- (void)markNotRemember {
-    self.reviewBoardView.showDefinition = YES;
-    [self updateButtonsShowNextButton:YES withTag:1];
 }
 
 - (void)updateButtonsShowNextButton:(BOOL)showNextButton withTag:(NSInteger)tag {

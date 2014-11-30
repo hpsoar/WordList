@@ -14,6 +14,8 @@
 
 + (instancetype)sharedDB;
 
+- (void)activate;
+
 - (Word *)insertWord;
 
 - (void)deleteWord:(Word *)word;

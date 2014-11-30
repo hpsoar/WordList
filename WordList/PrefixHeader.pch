@@ -17,4 +17,6 @@
 #import "UIView+Utility.h"
 #import "Macros.h"
 
+#import "NIDebuggingTools.h"
+
 #endif

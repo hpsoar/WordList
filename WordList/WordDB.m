@@ -8,8 +8,6 @@
 
 #import "WordDB.h"
 
-static NSString *wordEntityName = @"Word";
-
 @implementation WordDB {
     NSString *_entityName;
 }
@@ -24,19 +22,21 @@ static NSString *wordEntityName = @"Word";
 }
 
 - (id)init {
-    self = [super initWithModelName:@"WordList" storeURL:@"WordList.sqlite" ubiquitousContentName:@"iCloudWordListStore"];
+    self = [super initWithModelName:@"WordList"
+                           storeURL:@"WordList.sqlite"
+              ubiquitousContentName:@"iCloudWordListStore"];
     if (self) {
-        NSNotificationCenter *dc = [NSNotificationCenter defaultCenter];
-        [dc addObserver:self
-               selector:@selector(persistentStoreDidImportUbiquitousContentChanges:)
-                   name:NSPersistentStoreDidImportUbiquitousContentChangesNotification
-                 object:self.persistentStoreCoordinator];
+        _entityName = @"Word";
     }
     return self;
 }
 
+- (void)activate {
+    
+}
+
 - (Word *)insertWord {
-    return [self insertObjectForEntityWithName:wordEntityName];
+    return [self insertObjectForEntityWithName:_entityName];
 }
 
 - (void)deleteWord:(Word *)word {
@@ -45,44 +45,26 @@ static NSString *wordEntityName = @"Word";
 
 - (Word *)word:(NSString *)text {
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"word = %@", text];
-    return [self queryOneFromEntityWithName:wordEntityName withPredicate:predicate];
+    return [self queryOneFromEntityWithName:_entityName withPredicate:predicate];
 }
 
 - (NSFetchRequest *)fetchRequest {
-    NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"word" ascending:YES selector:@selector(localizedCaseInsensitiveCompare:)];
-    NSFetchRequest *fetchRequest = [self fetchRequestForEntity:wordEntityName predicate:nil sortDescriptor:sortDescriptor batchSize:20];
+    NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"word"
+                                                                     ascending:YES
+                                                                      selector:@selector(localizedCaseInsensitiveCompare:)];
+    NSFetchRequest *fetchRequest = [self fetchRequestForEntity:_entityName
+                                                     predicate:nil
+                                                sortDescriptor:sortDescriptor
+                                                     batchSize:20];
     return fetchRequest;
 }
 
 - (NSFetchedResultsController *)fetchedResultsControllerSectioned:(BOOL)sectioned {
     NSFetchRequest *fetchRequest = [self fetchRequest];
-    NSFetchedResultsController *controller = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:self.managedObjectContext sectionNameKeyPath:@"firstLetter" cacheName:nil];
-    return controller;
-}
-
-- (void)persistentStoreDidImportUbiquitousContentChanges:(NSNotification *)notification {
-    NSManagedObjectContext *moc = self.managedObjectContext;
-    [moc performBlock:^{
-        [moc mergeChangesFromContextDidSaveNotification:notification];
-        
-        // you may want to post a notification here so that which ever part of your app
-        // needs to can react appropriately to what was merged.
-        // An exmaple of how to iterate over what was merged follows, although I wouldn't
-        // recommend doing it here. Better handle it in a delegate or use notifications.
-        // Note that the notification contains NSManagedObjectIDs
-        // and not NSManagedObjects.
-        NSDictionary *changes = notification.userInfo;
-        NSMutableSet *allChanges = [NSMutableSet new];
-        [allChanges unionSet:changes[NSInsertedObjectsKey]];
-        [allChanges unionSet:changes[NSUpdatedObjectsKey]];
-        [allChanges unionSet:changes[NSDeletedObjectsKey]];
-
-        for (NSManagedObjectID *objID in allChanges) {
-            // do whatever you need to with the NSManagedObjectID
-            // you can retrieve the object from with [moc objectWithID:objID]
-            NSLog(@"object: %@",[moc objectWithID:objID]);
-        }
-    }];
+    return [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest
+                                               managedObjectContext:self.managedObjectContext
+                                                 sectionNameKeyPath:@"firstLetter"
+                                                          cacheName:nil];
 }
 
 @end

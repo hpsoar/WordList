@@ -107,6 +107,8 @@
     [super layoutSubviews];
     
     _container.frame = CGRectMake(5, 5, self.width - 10, self.height - 10);
+    
+    [self doLayout];
 }
 
 - (BOOL)shouldUpdateCellWithObject:(id)object {
@@ -139,11 +141,16 @@
     else {
         _container.backgroundColor = kNormalColor;
     }
+    
+    [self doLayout];
+    
+    return YES;
+}
+
+- (void)doLayout {
     _wordLabel.centerX = _container.width / 2;
     _phoneticLabel.centerX = _wordLabel.centerX;
     _definitionLabel.centerX = _wordLabel.centerX;
-    
-    return YES;
 }
 
 - (void)selectItem {

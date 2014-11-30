@@ -139,7 +139,11 @@ NSString* const kYoudaokey      = @"482091942";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title = @"No Word";
+    
+    self.navigationController.navigationBar.topItem.title = @"";
+    
+    [self updateTitle];
+    
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSearch target:self action:@selector(search)];
    
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemBookmarks target:self action:@selector(showWordbook)];
@@ -147,6 +151,10 @@ NSString* const kYoudaokey      = @"482091942";
     self.editingView = [[WordEditingActionView alloc] initWithFrame:CGRectMake(0, 0, self.view.width, 60)];
     self.editingView.delegate = self;
     self.tableView.tableHeaderView = self.editingView;
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
 }
 
 - (void)loadView {
@@ -230,8 +238,15 @@ NSString* const kYoudaokey      = @"482091942";
     [self.navigationController pushViewController:controller animated:YES];
 }
 
+- (void)updateTitle {
+    UILabel *label = [UILabel new];
+    label.text= self.editingView.word == nil ? @"No Word" : self.editingView.word;
+    [label sizeToFit];
+    self.navigationItem.titleView = label;
+}
+
 - (void)wordEdittingViewDidEditWord {
-    self.title = self.editingView.word == nil ? @"No Word" : self.editingView.word;
+    [self updateTitle];
         
     [self queryYoudao:self.editingView.editedWord];
 }

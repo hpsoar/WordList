@@ -25,6 +25,11 @@
 		1261A3441A23890200B222F5 /* AFURLResponseSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = 1261A33A1A23890200B222F5 /* AFURLResponseSerialization.m */; };
 		1261A3451A23890200B222F5 /* AFURLSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1261A33C1A23890200B222F5 /* AFURLSessionManager.m */; };
 		126AC42E1A24C8FE0053ED98 /* WordList.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 126AC42C1A24C8FE0053ED98 /* WordList.xcdatamodeld */; };
+		12B879DC1A2ACC7300022C70 /* easy-word-icon120.png in Resources */ = {isa = PBXBuildFile; fileRef = 12B879D81A2ACC7300022C70 /* easy-word-icon120.png */; };
+		12B879DD1A2ACC7300022C70 /* easy-word-icon180.png in Resources */ = {isa = PBXBuildFile; fileRef = 12B879D91A2ACC7300022C70 /* easy-word-icon180.png */; };
+		12B879DE1A2ACC7300022C70 /* easy-word-icon58.png in Resources */ = {isa = PBXBuildFile; fileRef = 12B879DA1A2ACC7300022C70 /* easy-word-icon58.png */; };
+		12B879DF1A2ACC7300022C70 /* easy-word-icon87.png in Resources */ = {isa = PBXBuildFile; fileRef = 12B879DB1A2ACC7300022C70 /* easy-word-icon87.png */; };
+		12B879E11A2ACCF400022C70 /* easy-word-icon80.png in Resources */ = {isa = PBXBuildFile; fileRef = 12B879E01A2ACCF400022C70 /* easy-word-icon80.png */; };
 		12C3550C1A24D1C600B247DF /* WordDB.m in Sources */ = {isa = PBXBuildFile; fileRef = 12C3550B1A24D1C600B247DF /* WordDB.m */; };
 		12C3551D1A24E2D600B247DF /* Macros.m in Sources */ = {isa = PBXBuildFile; fileRef = 12C355121A24E2D600B247DF /* Macros.m */; };
 		12C3551E1A24E2D600B247DF /* RefreshTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 12C355141A24E2D600B247DF /* RefreshTableViewController.m */; };
@@ -118,6 +123,11 @@
 		1261A33B1A23890200B222F5 /* AFURLSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFURLSessionManager.h; sourceTree = "<group>"; };
 		1261A33C1A23890200B222F5 /* AFURLSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFURLSessionManager.m; sourceTree = "<group>"; };
 		126AC42D1A24C8FE0053ED98 /* WordList.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = WordList.xcdatamodel; sourceTree = "<group>"; };
+		12B879D81A2ACC7300022C70 /* easy-word-icon120.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "easy-word-icon120.png"; sourceTree = "<group>"; };
+		12B879D91A2ACC7300022C70 /* easy-word-icon180.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "easy-word-icon180.png"; sourceTree = "<group>"; };
+		12B879DA1A2ACC7300022C70 /* easy-word-icon58.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "easy-word-icon58.png"; sourceTree = "<group>"; };
+		12B879DB1A2ACC7300022C70 /* easy-word-icon87.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "easy-word-icon87.png"; sourceTree = "<group>"; };
+		12B879E01A2ACCF400022C70 /* easy-word-icon80.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "easy-word-icon80.png"; sourceTree = "<group>"; };
 		12C355091A24D02B00B247DF /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		12C3550A1A24D1C600B247DF /* WordDB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WordDB.h; sourceTree = "<group>"; };
 		12C3550B1A24D1C600B247DF /* WordDB.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WordDB.m; sourceTree = "<group>"; };
@@ -257,6 +267,7 @@
 		1261A3011A2385A200B222F5 /* WordList */ = {
 			isa = PBXGroup;
 			children = (
+				12B879D71A2ACC7300022C70 /* Resources */,
 				121E92D21A29C4BA00A41E92 /* WordList.entitlements */,
 				1261A3061A2385A200B222F5 /* AppDelegate.h */,
 				1261A3071A2385A200B222F5 /* AppDelegate.m */,
@@ -342,6 +353,18 @@
 			);
 			name = AFNetworking;
 			path = ../nimbus/thirdparty/AFNetworking/AFNetworking;
+			sourceTree = "<group>";
+		};
+		12B879D71A2ACC7300022C70 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				12B879E01A2ACCF400022C70 /* easy-word-icon80.png */,
+				12B879D81A2ACC7300022C70 /* easy-word-icon120.png */,
+				12B879D91A2ACC7300022C70 /* easy-word-icon180.png */,
+				12B879DA1A2ACC7300022C70 /* easy-word-icon58.png */,
+				12B879DB1A2ACC7300022C70 /* easy-word-icon87.png */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 		12C355101A24E2D600B247DF /* OCKit */ = {
@@ -544,6 +567,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				1261A3131A2385A200B222F5 /* LaunchScreen.xib in Resources */,
+				12B879DE1A2ACC7300022C70 /* easy-word-icon58.png in Resources */,
+				12B879DC1A2ACC7300022C70 /* easy-word-icon120.png in Resources */,
+				12B879DF1A2ACC7300022C70 /* easy-word-icon87.png in Resources */,
+				12B879E11A2ACCF400022C70 /* easy-word-icon80.png in Resources */,
+				12B879DD1A2ACC7300022C70 /* easy-word-icon180.png in Resources */,
 				1261A3101A2385A200B222F5 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

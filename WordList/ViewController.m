@@ -11,6 +11,7 @@
 #import "WordItem.h"
 #import "WordListViewController.h"
 #import "ReviewWordViewController.h"
+#import "UIButton+Utility.h"
 
 @protocol WordEditingActionViewDelegate <NSObject>
 
@@ -22,65 +23,61 @@
 @property (nonatomic, weak) id<WordEditingActionViewDelegate> delegate;
 @property (nonatomic, readonly) NSString *editedWord;
 @property (nonatomic, readonly) NSString *word;
+
+@end
+
+@interface WordEditingActionView ()
+@property (nonatomic, strong)  CollapsableButton *editButton;
+
+@property (nonatomic, strong)  CollapsableButton *pasteBtn;
+@property (nonatomic, strong)  CollapsableButton *oneBtn;
+@property (nonatomic, strong)  CollapsableButton *twoBtn;
 @end
 
 @implementation WordEditingActionView {
     NSString *_editedWord;
-    NSMutableArray *_btns;
-    UIButton *_bigPasteBtn;
-    UIView *_container;
+    CGFloat _xSpace;
+    CGFloat _btnWidth;
+    NSArray *_btns;
 }
 
 - (id)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
-        self.backgroundColor = [UIColor whiteColor];
+        _btnWidth = 60;
+        _xSpace = (self.width - 4 * _btnWidth) / 5;
         
-        NSArray *titles = @[@"1", @"2", @"P", @"E", @"R" ];
-        CGFloat size = 48;
+        CGFloat bigWidth = (self.width - 3 * _xSpace) / 2;
+        self.editButton = [[CollapsableButton alloc] initWithFrame:CGRectMake(_xSpace, 0, bigWidth, _btnWidth)];
+        self.editButton.title = @"Edit";
+        self.editButton.collapseToLeft = YES;
+        self.editButton.backgroundColor = RGBCOLOR_HEX(0xF1C40F);
+        [self addSubview:self.editButton];
         
-        _bigPasteBtn = [self btnWithXOffset:20
-                                      width:self.width - 40
-                                     height:size
-                                      title:@"Paste to query"
-                                      color:[UIColor redColor]];
-        _bigPasteBtn.tag = 2;
-        [self addSubview:_bigPasteBtn];
         
-        _container = [[UIView alloc] initWithFrame:self.bounds];
+        self.pasteBtn = [[CollapsableButton alloc] initWithFrame:CGRectMake(self.width - bigWidth - _xSpace, 0, bigWidth, _btnWidth)];
+        self.pasteBtn.title = @"Paste";
+        self.pasteBtn.collapseToLeft = YES;
+        self.pasteBtn.backgroundColor = RGBCOLOR_HEX(0x2ECD71);
+        [self addSubview:self.pasteBtn];
         
-        _btns = [[NSMutableArray alloc] initWithCapacity:titles.count];
+        self.oneBtn = [[CollapsableButton alloc] initWithFrame:CGRectMake(self.width, 0, _btnWidth, _btnWidth)];
+        self.oneBtn.title = @"1";
+        self.oneBtn.backgroundColor = RGBCOLOR_HEX(0x2ECD71);
+        [self addSubview:self.oneBtn];
+        self.twoBtn = [[CollapsableButton alloc] initWithFrame:CGRectMake(self.width, 0, _btnWidth, _btnWidth)];
+        self.twoBtn.title = @"2";
+        self.twoBtn.backgroundColor = RGBCOLOR_HEX(0x2ECD71);
+        [self addSubview:self.twoBtn];
         
-        UIColor *red = [UIColor redColor];
-        UIColor *gray = RGBCOLOR_HEX(0xf1c40f);
-        CGFloat xOffset = (self.width - titles.count * size - MAX(0, titles.count - 1) * 10) / 2;
-        
-        for (int i = 0; i < titles.count; ++i) {
-            UIButton *btn = [self btnWithXOffset:xOffset
-                                           width:size
-                                          height:size
-                                           title:titles[i]
-                                           color:i != 2 ? gray : red ];
-            xOffset += btn.width + 10;
-            btn.tag = i;
-            
-            [_container addSubview:btn];
-            [_btns addObject:btn];
+        _btns = @[ self.editButton, self.pasteBtn, self.oneBtn, self.twoBtn ];
+        for (CollapsableButton *btn in _btns) {
+            UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tappedBtn:)];
+            btn.userInteractionEnabled = YES;
+            [btn addGestureRecognizer:tap];
         }
     }
     return self;
-}
-
-- (UIButton *)btnWithXOffset:(CGFloat)xOffset width:(CGFloat)width height:(CGFloat)height title:(NSString *)title color:(UIColor *)color {
-    UIButton *btn = [[UIButton alloc] initWithFrame:CGRectMake(xOffset, 9, width, height)];
-    [btn setTitle:title forState:UIControlStateNormal];
-    btn.backgroundColor = color;
-    
-    btn.layer.cornerRadius = 3;
-    btn.clipsToBounds = YES;
-    
-    [btn addTarget:self action:@selector(actionSelected:) forControlEvents:UIControlEventTouchUpInside];
-    return btn;
 }
 
 - (void)actionSelected:(id)sender {
@@ -108,16 +105,10 @@
             _word = word;
             _editedWord = word;
             if (word != nil) {
-                if (_bigPasteBtn.superview) {
-                    [_bigPasteBtn removeFromSuperview];
-                    [self addSubview:_container];
-                }
+               
             }
             else {
-                if (_bigPasteBtn.superview == nil) {
-                    [_container removeFromSuperview];
-                    [self addSubview:_bigPasteBtn];
-                }
+               
             }
         }
             break;
@@ -130,6 +121,295 @@
     }
 }
 
+- (void)tappedBtn:(UIGestureRecognizer *)sender {
+    NSInteger index = [_btns indexOfObject:sender.view];
+    if (index == 0) {
+        
+    }
+    else if (index == 1) {
+//        if (self.pasteBtn.width > _btnWidth + 10) {
+            [self animate];
+ //       }
+        //
+    }
+    else if (index == 2) {
+        
+    }
+    else if (index == 3) {
+        
+    }
+}
+
+- (CGFloat)stride {
+    return _xSpace + _btnWidth;
+}
+
+- (void)animate {
+    CGFloat duration = 0.3;
+    
+    [self.editButton animateToX:_xSpace duration:duration];
+    [self.pasteBtn animateToX:_xSpace + [self stride] duration:duration];
+    
+    NSArray *keyTimes = @[ @0, @1 ];
+    CGFloat xOffset = self.width;
+    {
+        CGFloat x0 = xOffset + self.oneBtn.width / 2;
+        CGFloat x2 = _xSpace + [self stride] * 2 + self.oneBtn.width / 2;
+        CAKeyframeAnimation *xAni = [CAKeyframeAnimation animationWithKeyPath:@"position.x"];
+        xAni.values = @[ @(x0), @(x2) ];
+        xAni.duration = duration;
+        xAni.keyTimes = keyTimes;
+        self.oneBtn.layer.position = CGPointMake(x2, self.oneBtn.layer.position.y);
+        [self.oneBtn.layer addAnimation:xAni forKey:nil];
+    }
+    {
+        CGFloat x0 = xOffset + [self stride] + self.twoBtn.width / 2;
+        CGFloat x2 = _xSpace + [self stride] * 3 + self.oneBtn.width / 2;
+        CAKeyframeAnimation *xAni = [CAKeyframeAnimation animationWithKeyPath:@"position.x"];
+        xAni.values = @[ @(x0), @(x2) ];
+        xAni.duration = duration;
+        xAni.keyTimes = keyTimes;
+        xAni.delegate = self;
+        self.twoBtn.layer.position = CGPointMake(x2, self.twoBtn.layer.position.y);
+        [self.twoBtn.layer addAnimation:xAni forKey:nil];
+    }
+}
+
+- (void)animationDidStop:(CAAnimation *)anim finished:(BOOL)flag {
+    NIDPRINTMETHODNAME();
+    
+    for (UIView *btn in _btns) {
+        [self addPopAnimationToLayer:btn.layer withBounce:0.1 damp:0.055];
+    }
+}
+
+
+- (void) addPopAnimationToLayer:(CALayer *)aLayer withBounce:(CGFloat)bounce damp:(CGFloat)damp{
+    // TESTED WITH BOUNCE = 0.2, DAMP = 0.055
+    CAKeyframeAnimation *animation = [CAKeyframeAnimation animationWithKeyPath:@"transform.scale"];
+    animation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionLinear];
+    animation.duration = 1;
+    
+    int steps = 100;
+    NSMutableArray *values = [NSMutableArray arrayWithCapacity:steps];
+    double value = 0;
+    float e = 2.71;
+    for (int t=0; t<100; t++) {
+        value = pow(e, -damp*t) * sin(bounce*t) + 1;
+        [values addObject:[NSNumber numberWithFloat:value]];
+    }
+    animation.values = values;
+    [aLayer addAnimation:animation forKey:@"appear"];
+}
+
+
+@end
+
+
+@implementation  CollapsableButton {
+    UILabel *_titleLabel;
+    UILabel *_secondLabel;
+    NSInteger _originalX;
+    NSInteger _originalWidth;
+}
+
+- (id)initWithFrame:(CGRect)frame {
+    self = [super initWithFrame:frame];
+    if (self) {
+        self.layer.cornerRadius = self.height / 2;
+        self.clipsToBounds = YES;
+        self.layer.borderColor = [UIColor whiteColor].CGColor;
+        self.layer.borderWidth = 0.5;
+        _titleLabel = [[UILabel alloc] initWithFrame:NIRectContract(self.bounds, 20, 10)];
+        [self addSubview:_titleLabel];
+        
+        _secondLabel = [[UILabel alloc] initWithFrame:NIRectContract(self.bounds, self.width - self.height, 0)];
+        _secondLabel.alpha = 1;
+        [self addSubview:_secondLabel];
+        
+        _originalWidth = self.width;
+        _originalX = self.left;
+    }
+    return self;
+}
+
+- (void)setTitle:(NSString *)title {
+    _titleLabel.text = title;
+    [_titleLabel sizeToFit];
+    
+    _secondLabel.text = [title substringToIndex:1];
+    [_secondLabel sizeToFit];
+    
+    [self reset];
+}
+
+- (void)reset {
+    _titleLabel.alpha = 1;
+    self.left = _originalX;
+    self.width = _originalWidth;
+    
+    _titleLabel.center = CGPointMake(self.width / 2, self.height / 2);
+    _secondLabel.left = _titleLabel.left;
+    _secondLabel.centerY = _titleLabel.centerY;
+}
+
+- (void)animateToX:(CGFloat)toX duration:(CGFloat)duration {
+    [self reset];
+    
+    /*
+     * 1. frame1: x, y, width, height
+     * 2. frame2: x, y, left * 2 + _title.width, height
+     * 3. frame3: x, y, height, height
+     */
+    CGFloat left = (self.height - _secondLabel.width) / 2;
+
+    CGFloat w0 = self.width;
+    CGFloat w1 = left * 2 + _titleLabel.width;
+    CGFloat w2 = self.height;
+    
+    CGFloat ratio = (w1 - w0) / (w2 - w0);
+    NSArray *keyTimes = @[ @0, @(ratio), @1.0 ];
+    
+    {
+        CGFloat fromX = self.left;
+        CGFloat middleX = ratio * (fromX - toX) + toX;
+        CGFloat x0 = fromX + w0 / 2;
+        CGFloat x1 = middleX + w1 / 2;
+        CGFloat x2 = toX + w2 / 2;
+        self.left = toX;
+        self.width = w2;
+        CAKeyframeAnimation *wAni = [CAKeyframeAnimation animationWithKeyPath:@"bounds.size.width"];
+        wAni.values = @[ @(w0), @(w1), @(w2) ];
+        wAni.duration = duration;
+        wAni.keyTimes = keyTimes;
+        [self.layer addAnimation:wAni forKey:nil];
+         
+         CAKeyframeAnimation *xAni = [CAKeyframeAnimation animationWithKeyPath:@"position.x"];
+         xAni.values = @[ @(x0), @(x1), @(x2) ];
+         xAni.duration = duration;
+         xAni.keyTimes = keyTimes;
+         [self.layer addAnimation:xAni forKey:nil];
+     }
+    
+    {
+        CGFloat x0 = w0 / 2 - _titleLabel.width / 2 + _secondLabel.width / 2;
+        CGFloat x1 = w1 / 2 - _titleLabel.width / 2 + _secondLabel.width / 2;
+        CGFloat x2 = w2 / 2;
+        _secondLabel.layer.position = CGPointMake(x2, self.height / 2);
+        NSArray *values = @[ @(x0), @(x1), @(x2) ];
+        CAKeyframeAnimation* anim = [CAKeyframeAnimation animationWithKeyPath:@"position.x"];
+        anim.values = values;
+        anim.duration = duration;
+        anim.keyTimes = keyTimes;
+        [_secondLabel.layer addAnimation:anim forKey:nil];
+    }
+    _titleLabel.layer.opacity = 0;
+    {
+        CGFloat x0 = w0 / 2;
+        CGFloat x1 = w1 / 2;
+        CGFloat x2 = w2 / 2;
+        CAKeyframeAnimation *xAni = [CAKeyframeAnimation animationWithKeyPath:@"position.x"];
+        xAni.values = @[ @(x0), @(x1), @(x1) ];
+        xAni.duration = duration;
+        xAni.keyTimes = keyTimes;
+        [_titleLabel.layer addAnimation:xAni forKey:nil];
+        
+        CAKeyframeAnimation *aAni = [CAKeyframeAnimation animationWithKeyPath:@"opacity"];
+        aAni.values = @[ @1, @0, @0 ];
+        aAni.duration = duration;
+        aAni.keyTimes = keyTimes;
+        [_titleLabel.layer addAnimation:aAni forKey:nil];
+    }
+}
+
+- (void)animationDidStop:(CAAnimation *)anim finished:(BOOL)flag {
+
+}
+
+@end
+
+@interface SplitButtonView : UIView
+@property (nonatomic, strong) NSString *title;
+
+- (void)reset;
+
+- (void)animate;
+@end
+
+@implementation SplitButtonView {
+    UILabel *_titleLabel;
+    CGFloat _originalX;
+    CGFloat _originalWidth;
+}
+
+- (id)initWithFrame:(CGRect)frame {
+    self = [super initWithFrame:frame];
+    if (self) {
+        self.layer.cornerRadius = self.height / 2;
+        self.clipsToBounds = YES;
+        _titleLabel = [[UILabel alloc] initWithFrame:NIRectContract(self.bounds, 20, 10)];
+        [self addSubview:_titleLabel];
+        
+        _originalX = self.left;
+        _originalWidth = self.width;
+    }
+    return self;
+}
+
+- (void)setTitle:(NSString *)title {
+    _titleLabel.text = title;
+    [_titleLabel sizeToFit];
+    
+    _titleLabel.center = CGPointMake(self.width / 2, self.height / 2);
+}
+
+- (void)reset {
+    self.left = _originalX;
+    self.width = _originalWidth;
+    self.alpha = 1;
+}
+
+- (void)animate {
+    [self reset];
+    
+    CGFloat w0 = self.width;
+    CGFloat w1 = 198;
+    CGFloat w2 = w1;
+    
+    NSArray *keyTimes = @[ @0,  @1 ];
+    
+    CGFloat duration = 0.5;
+    {
+        CGFloat xx = self.right;
+        CGFloat x0 = xx - w0 / 2;
+        CGFloat x1 = xx - w1 / 2;
+        CGFloat x2 = xx - w2 / 2;
+        
+        self.width = w2;
+        self.left = xx - w2;
+        
+        CAKeyframeAnimation *wAni = [CAKeyframeAnimation animationWithKeyPath:@"bounds.size.width"];
+        wAni.values = @[ @(w0), @(w1) ];
+        wAni.duration = duration;
+        wAni.keyTimes = keyTimes;
+        [self.layer addAnimation:wAni forKey:nil];
+        
+        CAKeyframeAnimation *xAni = [CAKeyframeAnimation animationWithKeyPath:@"position.x"];
+        xAni.values = @[ @(x0), @(x1) ];
+        xAni.duration = duration;
+        xAni.keyTimes = keyTimes;
+        [self.layer addAnimation:xAni forKey:nil];
+        
+        
+        self.alpha = 0;
+        CAKeyframeAnimation *aAni = [CAKeyframeAnimation animationWithKeyPath:@"opacity"];
+        aAni.values = @[ @(1), @(0) ];
+        aAni.duration = duration;
+        aAni.keyTimes = keyTimes;
+        [self.layer addAnimation:aAni forKey:nil];
+    }
+}
+
 @end
 
 NSString* const kYoudaoKeyFrom  = @"kernelpanic";
@@ -138,6 +418,9 @@ NSString* const kYoudaokey      = @"482091942";
 @interface ViewController () <WordEditingActionViewDelegate>
 @property (nonatomic, strong) WordEditingActionView *editingView;
 @property (nonatomic, strong) AFHTTPSessionManager *httpSession;
+
+
+
 @end
 
 @implementation ViewController
@@ -151,18 +434,26 @@ NSString* const kYoudaokey      = @"482091942";
     
     self.navigationController.navigationBar.topItem.title = @"";
     
-    [self updateTitle];
+    self.view.backgroundColor = RGBCOLOR_HEX(0x3598DC);
     
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSearch target:self action:@selector(search)];
-   
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemBookmarks target:self action:@selector(showWordbook)];
+    self.tableView.backgroundColor = [UIColor clearColor];
     
-    self.editingView = [[WordEditingActionView alloc] initWithFrame:CGRectMake(0, 0, self.view.width, 66)];
+//    [self updateTitle];
+//    
+//    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSearch target:self action:@selector(search)];
+//   
+//    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemBookmarks target:self action:@selector(showWordbook)];
+//    
+//    self.editingView = [[WordEditingActionView alloc] initWithFrame:CGRectMake(0, 0, self.view.width, 66)];
+//    self.editingView.delegate = self;
+//    
+//    [self.view addSubview:self.editingView];
+//    
+//    self.tableView.frame = NIRectContract(self.tableView.frame, 0, self.editingView.height);
+    
+    self.editingView = [[WordEditingActionView alloc] initWithFrame:CGRectMake(0, 60, self.view.width, 60)];
     self.editingView.delegate = self;
-    
     [self.view addSubview:self.editingView];
-    
-    self.tableView.frame = NIRectContract(self.tableView.frame, 0, self.editingView.height);
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -177,7 +468,6 @@ NSString* const kYoudaokey      = @"482091942";
 - (void)viewWillLayoutSubviews {
     [super viewWillLayoutSubviews];
     
-    self.editingView.top = self.tableView.bottom;
 }
 
 - (void)updateModelWithWordList:(NSArray *)wordList {
@@ -268,6 +558,21 @@ NSString* const kYoudaokey      = @"482091942";
     [self updateTitle];
         
     [self queryYoudao:self.editingView.editedWord];
+}
+
+- (void)pasteFromClipboard {
+//    [UIView animateWithDuration:2 animations:^{
+//    if (self.pasteBtn.width > self.pasteBtn.height) {
+//        [self.pasteBtn setTitle:@"P" forState:UIControlStateNormal];
+//        self.pasteBtn.width = self.pasteBtn.height;
+//    }
+//    else {
+//        self.pasteBtn.width = 140;
+//        [self.pasteBtn setTitle:@"Paste" forState:UIControlStateNormal];
+//    }
+//    }];
+    
+    
 }
 
 @end

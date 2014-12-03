@@ -14,3 +14,16 @@
 
 @end
 
+@interface CollapsableButton : UIView
+
+@property (nonatomic, assign) NSString *title;
+
+@property (nonatomic) BOOL collapseToLeft;
+
+- (void)animateToX:(CGFloat)toX duration:(CGFloat)duration;
+
+- (void)reset;
+
+
+@end
+

@@ -27,3 +27,14 @@
 
 @end
 
+@protocol SearchViewDelegate <NSObject>
+
+- (void)searchTextChanged;
+
+@end
+
+@interface SearchView : UIView
+@property (nonatomic, strong) NSString *word;
+@property (nonatomic, weak) id<SearchViewDelegate> delegate;
+@end
+

@@ -17,12 +17,14 @@
 
 - (void)wordEdittingViewDidEditWord;
 
+- (void)chooseToSearch;
+
 @end
 
 @interface WordEditingActionView : UIView
 @property (nonatomic, weak) id<WordEditingActionViewDelegate> delegate;
 @property (nonatomic, readonly) NSString *editedWord;
-@property (nonatomic, readonly) NSString *word;
+@property (nonatomic, strong) NSString *word;
 
 @end
 
@@ -44,7 +46,12 @@
 - (id)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
-        _btnWidth = 60;
+        if (self.width > 640) {
+            _btnWidth = 60;
+        }
+        else {
+            _btnWidth = 56;
+        }
         _xSpace = (self.width - 4 * _btnWidth) / 5;
         
         CGFloat bigWidth = (self.width - 3 * _xSpace) / 2;
@@ -121,23 +128,39 @@
     }
 }
 
+- (void)setWord:(NSString *)word {
+    _word = word;
+    _editedWord = word;
+}
+
 - (void)tappedBtn:(UIGestureRecognizer *)sender {
     NSInteger index = [_btns indexOfObject:sender.view];
     if (index == 0) {
-        
+        [self.delegate chooseToSearch];
+        return;
     }
     else if (index == 1) {
 //        if (self.pasteBtn.width > _btnWidth + 10) {
             [self animate];
  //       }
         //
+        NSString *word = [UIPasteboard generalPasteboard].string;
+        if ([_editedWord isEqualToString:word]) {
+            return;
+        }
+        _word = word;
+        _editedWord = word;
     }
     else if (index == 2) {
-        
+        if (self.word.length < 2) return;
+        _editedWord = [self.word substringToIndex:self.word.length - 1];
     }
     else if (index == 3) {
-        
+        if (self.word.length < 3) return;
+        _editedWord = [self.word substringToIndex:self.word.length - 2];
     }
+    
+    [self.delegate wordEdittingViewDidEditWord];
 }
 
 - (CGFloat)stride {
@@ -219,12 +242,14 @@
         self.layer.cornerRadius = self.height / 2;
         self.clipsToBounds = YES;
         self.layer.borderColor = [UIColor whiteColor].CGColor;
-        self.layer.borderWidth = 0.5;
+        self.layer.borderWidth = 0.8;
         _titleLabel = [[UILabel alloc] initWithFrame:NIRectContract(self.bounds, 20, 10)];
+        _titleLabel.textColor = [UIColor whiteColor];
         [self addSubview:_titleLabel];
         
         _secondLabel = [[UILabel alloc] initWithFrame:NIRectContract(self.bounds, self.width - self.height, 0)];
         _secondLabel.alpha = 1;
+        _secondLabel.textColor = [UIColor whiteColor];
         [self addSubview:_secondLabel];
         
         _originalWidth = self.width;
@@ -233,14 +258,21 @@
     return self;
 }
 
+- (NSString *)title {
+    return _titleLabel.text;
+}
+
 - (void)setTitle:(NSString *)title {
+    BOOL shouldReset = self.width == _originalWidth || _titleLabel.text == nil;
     _titleLabel.text = title;
     [_titleLabel sizeToFit];
     
     _secondLabel.text = [title substringToIndex:1];
     [_secondLabel sizeToFit];
     
-    [self reset];
+    if (shouldReset) {
+        [self reset];
+    }
 }
 
 - (void)reset {
@@ -328,86 +360,61 @@
 
 @end
 
-@interface SplitButtonView : UIView
-@property (nonatomic, strong) NSString *title;
+@interface SearchView () <UITextFieldDelegate>
 
-- (void)reset;
-
-- (void)animate;
 @end
 
-@implementation SplitButtonView {
-    UILabel *_titleLabel;
-    CGFloat _originalX;
-    CGFloat _originalWidth;
+@implementation SearchView {
+    UITextField *_textField;
 }
 
 - (id)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
-        self.layer.cornerRadius = self.height / 2;
-        self.clipsToBounds = YES;
-        _titleLabel = [[UILabel alloc] initWithFrame:NIRectContract(self.bounds, 20, 10)];
-        [self addSubview:_titleLabel];
+        _textField = [[UITextField alloc] initWithFrame:CGRectMake(20, 0, self.width - 40, self.height)];
+        _textField.placeholder = @"Enter a word";
+        _textField.clearButtonMode = UITextFieldViewModeWhileEditing;
+        _textField.returnKeyType = UIReturnKeyDone;
+        _textField.textColor = [UIColor whiteColor];
+        self.backgroundColor = RGBCOLOR_HEX(0x8B572A);
+        _textField.delegate = self;
         
-        _originalX = self.left;
-        _originalWidth = self.width;
+        [self addSubview:_textField];
+        
+        UIView *line = [UIView lineWithColor:[UIColor whiteColor] width:self.width height:0.5];
+        line.top = self.height - 1;
+        [self addSubview:line];
+        
+        [_textField addTarget:self
+                       action:@selector(valueChanged:)
+             forControlEvents:UIControlEventEditingChanged];
     }
     return self;
 }
 
-- (void)setTitle:(NSString *)title {
-    _titleLabel.text = title;
-    [_titleLabel sizeToFit];
-    
-    _titleLabel.center = CGPointMake(self.width / 2, self.height / 2);
+- (void)setWord:(NSString *)word {
+    _textField.text = word;
 }
 
-- (void)reset {
-    self.left = _originalX;
-    self.width = _originalWidth;
-    self.alpha = 1;
+- (NSString *)word {
+    return _textField.text;
 }
 
-- (void)animate {
-    [self reset];
-    
-    CGFloat w0 = self.width;
-    CGFloat w1 = 198;
-    CGFloat w2 = w1;
-    
-    NSArray *keyTimes = @[ @0,  @1 ];
-    
-    CGFloat duration = 0.5;
-    {
-        CGFloat xx = self.right;
-        CGFloat x0 = xx - w0 / 2;
-        CGFloat x1 = xx - w1 / 2;
-        CGFloat x2 = xx - w2 / 2;
-        
-        self.width = w2;
-        self.left = xx - w2;
-        
-        CAKeyframeAnimation *wAni = [CAKeyframeAnimation animationWithKeyPath:@"bounds.size.width"];
-        wAni.values = @[ @(w0), @(w1) ];
-        wAni.duration = duration;
-        wAni.keyTimes = keyTimes;
-        [self.layer addAnimation:wAni forKey:nil];
-        
-        CAKeyframeAnimation *xAni = [CAKeyframeAnimation animationWithKeyPath:@"position.x"];
-        xAni.values = @[ @(x0), @(x1) ];
-        xAni.duration = duration;
-        xAni.keyTimes = keyTimes;
-        [self.layer addAnimation:xAni forKey:nil];
-        
-        
-        self.alpha = 0;
-        CAKeyframeAnimation *aAni = [CAKeyframeAnimation animationWithKeyPath:@"opacity"];
-        aAni.values = @[ @(1), @(0) ];
-        aAni.duration = duration;
-        aAni.keyTimes = keyTimes;
-        [self.layer addAnimation:aAni forKey:nil];
-    }
+- (BOOL)becomeFirstResponder {
+    return [_textField becomeFirstResponder];
+}
+
+- (BOOL)resignFirstResponder {
+    return [_textField resignFirstResponder];
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    [_textField resignFirstResponder];
+    return YES;
+}
+
+- (void)valueChanged:(id)sender {
+    [self.delegate searchTextChanged];
 }
 
 @end
@@ -415,11 +422,12 @@
 NSString* const kYoudaoKeyFrom  = @"kernelpanic";
 NSString* const kYoudaokey      = @"482091942";
 
-@interface ViewController () <WordEditingActionViewDelegate>
+@interface ViewController () <WordEditingActionViewDelegate, SearchViewDelegate>
 @property (nonatomic, strong) WordEditingActionView *editingView;
+
+@property (nonatomic, strong) SearchView *searchView;
+
 @property (nonatomic, strong) AFHTTPSessionManager *httpSession;
-
-
 
 @end
 
@@ -427,6 +435,38 @@ NSString* const kYoudaokey      = @"482091942";
 
 - (void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+- (void)setupNotifications {
+    [[NSNotificationCenter defaultCenter]addObserver:self
+                                            selector:@selector(onKeyboardWillHide:)
+                                                name:UIKeyboardWillHideNotification
+                                              object:nil];
+    [[NSNotificationCenter defaultCenter]addObserver:self
+                                            selector:@selector(onKeyboardWillShow:)
+                                                name:UIKeyboardWillShowNotification
+                                              object:nil];
+    [[NSNotificationCenter defaultCenter]addObserver:self
+                                            selector:@selector(onKeyboardDidHide:)
+                                                name:UIKeyboardDidHideNotification
+                                              object:nil];
+}
+
+- (void)onKeyboardWillShow:(NSNotification *)notification {
+    NIDPRINT(@"%@", notification);
+    CGRect endRect = [notification.userInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue];
+    self.searchView.bottom = endRect.origin.y;
+}
+
+- (void)onKeyboardWillHide:(NSNotification *)notification {
+    NIDPRINT(@"%@", notification);
+    self.searchView.top = self.view.height;
+    self.editingView.top = self.view.height - 70;
+}
+
+- (void)onKeyboardDidHide:(NSNotification *)notification {
+    [UIView animateWithDuration:0.1 animations:^{
+    }];
 }
 
 - (void)viewDidLoad {
@@ -438,22 +478,19 @@ NSString* const kYoudaokey      = @"482091942";
     
     self.tableView.backgroundColor = [UIColor clearColor];
     
-//    [self updateTitle];
-//    
-//    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSearch target:self action:@selector(search)];
-//   
-//    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemBookmarks target:self action:@selector(showWordbook)];
-//    
-//    self.editingView = [[WordEditingActionView alloc] initWithFrame:CGRectMake(0, 0, self.view.width, 66)];
-//    self.editingView.delegate = self;
-//    
-//    [self.view addSubview:self.editingView];
-//    
-//    self.tableView.frame = NIRectContract(self.tableView.frame, 0, self.editingView.height);
+    [self setupNotifications];
     
-    self.editingView = [[WordEditingActionView alloc] initWithFrame:CGRectMake(0, 60, self.view.width, 60)];
+    self.editingView = [[WordEditingActionView alloc] initWithFrame:CGRectMake(0, self.view.height - 70, self.view.width, 60)];
     self.editingView.delegate = self;
     [self.view addSubview:self.editingView];
+    
+    self.searchView = [[SearchView alloc] initWithFrame:CGRectMake(0, self.view.height, self.view.width, 44)];
+    self.searchView.delegate = self;
+    [self.view addSubview:self.searchView];
+    
+    self.tableView.top = 30;
+    self.tableView.height = self.view.height - 30;
+    self.tableView.tableFooterView = [UIView viewWithFrame:CGRectMake(0, 0, self.view.width, 70) andBkColor:[UIColor clearColor]];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -507,7 +544,10 @@ NSString* const kYoudaokey      = @"482091942";
         NSString *query = json[@"query"];
         NSArray *translations = json[@"translation"];
         NSDictionary *basic = json[@"basic"];
-        NSArray *explains = basic[@"explains"];
+        NSMutableArray *explains = [basic[@"explains"] mutableCopy];
+        for (int i = 0; i < explains.count; ++i) {
+            explains[i] = [explains[i] stringByReplacingOccurrencesOfString:@"；" withString:@"\n"];
+        }
         NSString *phontic = basic[@"phonetic"];
         NSString *ukPhonetic = basic[@"uk-phonetic"];
         NSString *usPhonetic = basic[@"us-phonetic"];
@@ -560,19 +600,22 @@ NSString* const kYoudaokey      = @"482091942";
     [self queryYoudao:self.editingView.editedWord];
 }
 
-- (void)pasteFromClipboard {
-//    [UIView animateWithDuration:2 animations:^{
-//    if (self.pasteBtn.width > self.pasteBtn.height) {
-//        [self.pasteBtn setTitle:@"P" forState:UIControlStateNormal];
-//        self.pasteBtn.width = self.pasteBtn.height;
-//    }
-//    else {
-//        self.pasteBtn.width = 140;
-//        [self.pasteBtn setTitle:@"Paste" forState:UIControlStateNormal];
-//    }
-//    }];
-    
-    
+- (void)chooseToSearch {
+    [UIView animateWithDuration:0.1 animations:^{
+        self.editingView.top = self.view.height;
+    } completion:^(BOOL finished) {
+        [self.searchView becomeFirstResponder];
+        self.searchView.word = self.editingView.editedWord;
+    }];
+}
+
+- (void)searchTextChanged {
+    self.editingView.word = self.searchView.word;
+    [self queryYoudao:self.searchView.word];
+}
+
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
+    [self.searchView resignFirstResponder];
 }
 
 @end

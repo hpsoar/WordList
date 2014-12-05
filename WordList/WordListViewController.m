@@ -17,7 +17,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.title = @"Word List";
+    self.title= @"WORDS";
+    
+    self.view.backgroundColor = RGBCOLOR_HEX(0x3598DC);
+    self.tableView.top = 64;
     
     NSError *error;
     [self.fetchedResultsController performFetch:&error];

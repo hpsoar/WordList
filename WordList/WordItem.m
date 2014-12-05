@@ -71,9 +71,9 @@
 + (CGFloat)heightForObject:(id)object atIndexPath:(NSIndexPath *)indexPath tableView:(UITableView *)tableView {
     WordItem *item = object;
     CGFloat height = 0;
-    height += [Utility heightForText:item.word font:[self wordFont] width:tableView.width - 28];
-    height += [Utility heightForText:item.phonetic font:[self phoneticFont] width:tableView.width - 28];
-    height += [Utility heightForText:item.definition font:[self definitionFont] width:tableView.width - 28];
+    height += [Utility heightForText:item.word font:[self wordFont] width:tableView.width - 38];
+    height += [Utility heightForText:item.phonetic font:[self phoneticFont] width:tableView.width - 38];
+    height += [Utility heightForText:item.definition font:[self definitionFont] width:tableView.width - 38];
     if (item.phonetic) {
         return height + 30 + 20;
     }
@@ -137,7 +137,7 @@
 }
 
 - (CGRect)containerRect {
-    return CGRectMake(0, 5, self.width - 0, self.height - 10);
+    return CGRectMake(5, 0, self.width - 10, self.height - 10);
 }
 
 - (BOOL)shouldUpdateCellWithObject:(id)object {

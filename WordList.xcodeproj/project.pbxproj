@@ -25,6 +25,9 @@
 		1261A3451A23890200B222F5 /* AFURLSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1261A33C1A23890200B222F5 /* AFURLSessionManager.m */; };
 		126AC42E1A24C8FE0053ED98 /* WordList.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 126AC42C1A24C8FE0053ED98 /* WordList.xcdatamodeld */; };
 		129387D01A2F4F2E006AB150 /* UIButton+Utility.m in Sources */ = {isa = PBXBuildFile; fileRef = 129387CF1A2F4F2E006AB150 /* UIButton+Utility.m */; };
+		12996B461A32000B006961E7 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 12996B451A32000B006961E7 /* MainViewController.m */; };
+		12996B491A320353006961E7 /* OCViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 12996B481A320353006961E7 /* OCViewController.m */; };
+		12996B4C1A320A16006961E7 /* CustomNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 12996B4B1A320A16006961E7 /* CustomNavigationController.m */; };
 		12B879DC1A2ACC7300022C70 /* easy-word-icon120.png in Resources */ = {isa = PBXBuildFile; fileRef = 12B879D81A2ACC7300022C70 /* easy-word-icon120.png */; };
 		12B879DD1A2ACC7300022C70 /* easy-word-icon180.png in Resources */ = {isa = PBXBuildFile; fileRef = 12B879D91A2ACC7300022C70 /* easy-word-icon180.png */; };
 		12B879DE1A2ACC7300022C70 /* easy-word-icon58.png in Resources */ = {isa = PBXBuildFile; fileRef = 12B879DA1A2ACC7300022C70 /* easy-word-icon58.png */; };
@@ -126,6 +129,12 @@
 		126AC42D1A24C8FE0053ED98 /* WordList.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = WordList.xcdatamodel; sourceTree = "<group>"; };
 		129387CE1A2F4F2E006AB150 /* UIButton+Utility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIButton+Utility.h"; sourceTree = "<group>"; };
 		129387CF1A2F4F2E006AB150 /* UIButton+Utility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIButton+Utility.m"; sourceTree = "<group>"; };
+		12996B441A32000B006961E7 /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
+		12996B451A32000B006961E7 /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
+		12996B471A320353006961E7 /* OCViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OCViewController.h; sourceTree = "<group>"; };
+		12996B481A320353006961E7 /* OCViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OCViewController.m; sourceTree = "<group>"; };
+		12996B4A1A320A16006961E7 /* CustomNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomNavigationController.h; sourceTree = "<group>"; };
+		12996B4B1A320A16006961E7 /* CustomNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomNavigationController.m; sourceTree = "<group>"; };
 		12B879D81A2ACC7300022C70 /* easy-word-icon120.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "easy-word-icon120.png"; sourceTree = "<group>"; };
 		12B879D91A2ACC7300022C70 /* easy-word-icon180.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "easy-word-icon180.png"; sourceTree = "<group>"; };
 		12B879DA1A2ACC7300022C70 /* easy-word-icon58.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "easy-word-icon58.png"; sourceTree = "<group>"; };
@@ -295,6 +304,10 @@
 				12B879E31A2AE0A700022C70 /* ReviewWordViewController.m */,
 				129387CE1A2F4F2E006AB150 /* UIButton+Utility.h */,
 				129387CF1A2F4F2E006AB150 /* UIButton+Utility.m */,
+				12996B441A32000B006961E7 /* MainViewController.h */,
+				12996B451A32000B006961E7 /* MainViewController.m */,
+				12996B4A1A320A16006961E7 /* CustomNavigationController.h */,
+				12996B4B1A320A16006961E7 /* CustomNavigationController.m */,
 			);
 			path = WordList;
 			sourceTree = "<group>";
@@ -411,6 +424,8 @@
 				12C3551C1A24E2D600B247DF /* Utility.m */,
 				12C355291A24E3DF00B247DF /* BaseViewController.h */,
 				12C3552A1A24E3DF00B247DF /* BaseViewController.m */,
+				12996B471A320353006961E7 /* OCViewController.h */,
+				12996B481A320353006961E7 /* OCViewController.m */,
 			);
 			name = OCKit;
 			path = OCKit/OCKit/Classes;
@@ -636,6 +651,7 @@
 				12C355711A24E4CC00B247DF /* NIState.m in Sources */,
 				12C355681A24E4CC00B247DF /* NINavigationAppearance.m in Sources */,
 				12C3556B1A24E4CC00B247DF /* NINonRetainingCollections.m in Sources */,
+				12996B461A32000B006961E7 /* MainViewController.m in Sources */,
 				1261A33E1A23890200B222F5 /* AFHTTPRequestOperationManager.m in Sources */,
 				1261A3401A23890200B222F5 /* AFNetworkReachabilityManager.m in Sources */,
 				12C355721A24E4CC00B247DF /* NIViewRecycler.m in Sources */,
@@ -650,12 +666,14 @@
 				12B879E41A2AE0A700022C70 /* ReviewWordViewController.m in Sources */,
 				12C355941A24E78000B247DF /* NIFormCellCatalog.m in Sources */,
 				12C355A41A261A3E00B247DF /* Word+Utility.m in Sources */,
+				12996B4C1A320A16006961E7 /* CustomNavigationController.m in Sources */,
 				1261A3421A23890200B222F5 /* AFURLConnectionOperation.m in Sources */,
 				1261A3411A23890200B222F5 /* AFSecurityPolicy.m in Sources */,
 				1261A33F1A23890200B222F5 /* AFHTTPSessionManager.m in Sources */,
 				1261A3431A23890200B222F5 /* AFURLRequestSerialization.m in Sources */,
 				12C355791A24E72200B247DF /* OCTableViewController.m in Sources */,
 				1261A3451A23890200B222F5 /* AFURLSessionManager.m in Sources */,
+				12996B491A320353006961E7 /* OCViewController.m in Sources */,
 				12C355201A24E2D600B247DF /* UIImage+ImageEffects.m in Sources */,
 				1261A3081A2385A200B222F5 /* AppDelegate.m in Sources */,
 				12C355971A24E78000B247DF /* NIRadioGroupController.m in Sources */,

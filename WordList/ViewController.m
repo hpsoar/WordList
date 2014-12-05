@@ -56,14 +56,14 @@
         
         CGFloat bigWidth = (self.width - 3 * _xSpace) / 2;
         self.editButton = [[CollapsableButton alloc] initWithFrame:CGRectMake(_xSpace, 0, bigWidth, _btnWidth)];
-        self.editButton.title = @"Edit";
+        self.editButton.title = @"EDIT";
         self.editButton.collapseToLeft = YES;
         self.editButton.backgroundColor = RGBCOLOR_HEX(0xF1C40F);
         [self addSubview:self.editButton];
         
         
         self.pasteBtn = [[CollapsableButton alloc] initWithFrame:CGRectMake(self.width - bigWidth - _xSpace, 0, bigWidth, _btnWidth)];
-        self.pasteBtn.title = @"Paste";
+        self.pasteBtn.title = @"PASTE";
         self.pasteBtn.collapseToLeft = YES;
         self.pasteBtn.backgroundColor = RGBCOLOR_HEX(0x2ECD71);
         [self addSubview:self.pasteBtn];
@@ -169,6 +169,10 @@
 
 - (void)animate {
     CGFloat duration = 0.3;
+    if (self.pasteBtn.width == self.pasteBtn.height) {
+        [self popAnimation];
+        return;
+    }
     
     [self.editButton animateToX:_xSpace duration:duration];
     [self.pasteBtn animateToX:_xSpace + [self stride] duration:duration];
@@ -201,11 +205,14 @@
 - (void)animationDidStop:(CAAnimation *)anim finished:(BOOL)flag {
     NIDPRINTMETHODNAME();
     
+    [self popAnimation];
+}
+
+- (void)popAnimation {
     for (UIView *btn in _btns) {
         [self addPopAnimationToLayer:btn.layer withBounce:0.1 damp:0.055];
     }
 }
-
 
 - (void) addPopAnimationToLayer:(CALayer *)aLayer withBounce:(CGFloat)bounce damp:(CGFloat)damp{
     // TESTED WITH BOUNCE = 0.2, DAMP = 0.055
@@ -254,6 +261,10 @@
         
         _originalWidth = self.width;
         _originalX = self.left;
+        
+        UIFont *font = [UIFont fontWithName:@"HelveticaNeue-Light" size:24];
+        _titleLabel.font = font;
+        _secondLabel.font = font;
     }
     return self;
 }
@@ -455,13 +466,13 @@ NSString* const kYoudaokey      = @"482091942";
 - (void)onKeyboardWillShow:(NSNotification *)notification {
     NIDPRINT(@"%@", notification);
     CGRect endRect = [notification.userInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue];
-    self.searchView.bottom = endRect.origin.y;
+    self.searchView.bottom = self.view.height - endRect.size.height;
 }
 
 - (void)onKeyboardWillHide:(NSNotification *)notification {
     NIDPRINT(@"%@", notification);
     self.searchView.top = self.view.height;
-    self.editingView.top = self.view.height - 70;
+    self.editingView.bottom = self.view.height - 10;
 }
 
 - (void)onKeyboardDidHide:(NSNotification *)notification {
@@ -472,15 +483,13 @@ NSString* const kYoudaokey      = @"482091942";
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.navigationController.navigationBar.topItem.title = @"";
-    
     self.view.backgroundColor = RGBCOLOR_HEX(0x3598DC);
     
     self.tableView.backgroundColor = [UIColor clearColor];
     
     [self setupNotifications];
     
-    self.editingView = [[WordEditingActionView alloc] initWithFrame:CGRectMake(0, self.view.height - 70, self.view.width, 60)];
+    self.editingView = [[WordEditingActionView alloc] initWithFrame:CGRectMake(0, 0, self.view.width, 60)];
     self.editingView.delegate = self;
     [self.view addSubview:self.editingView];
     
@@ -488,13 +497,12 @@ NSString* const kYoudaokey      = @"482091942";
     self.searchView.delegate = self;
     [self.view addSubview:self.searchView];
     
-    self.tableView.top = 30;
-    self.tableView.height = self.view.height - 30;
     self.tableView.tableFooterView = [UIView viewWithFrame:CGRectMake(0, 0, self.view.width, 70) andBkColor:[UIColor clearColor]];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    self.editingView.bottom = self.view.height - 10;
 }
 
 - (void)loadView {
@@ -545,9 +553,6 @@ NSString* const kYoudaokey      = @"482091942";
         NSArray *translations = json[@"translation"];
         NSDictionary *basic = json[@"basic"];
         NSMutableArray *explains = [basic[@"explains"] mutableCopy];
-        for (int i = 0; i < explains.count; ++i) {
-            explains[i] = [explains[i] stringByReplacingOccurrencesOfString:@"；" withString:@"\n"];
-        }
         NSString *phontic = basic[@"phonetic"];
         NSString *ukPhonetic = basic[@"uk-phonetic"];
         NSString *usPhonetic = basic[@"us-phonetic"];
@@ -588,10 +593,7 @@ NSString* const kYoudaokey      = @"482091942";
 }
 
 - (void)updateTitle {
-    UILabel *label = [UILabel new];
-    label.text= self.editingView.word == nil ? @"No Word" : self.editingView.word;
-    [label sizeToFit];
-    self.navigationItem.titleView = label;
+    self.title = self.editingView.word == nil ? @"No Word" : self.editingView.editedWord;
 }
 
 - (void)wordEdittingViewDidEditWord {
@@ -612,6 +614,7 @@ NSString* const kYoudaokey      = @"482091942";
 - (void)searchTextChanged {
     self.editingView.word = self.searchView.word;
     [self queryYoudao:self.searchView.word];
+    [self updateTitle];
 }
 
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {

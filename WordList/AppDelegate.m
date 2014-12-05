@@ -7,7 +7,7 @@
 //
 
 #import "AppDelegate.h"
-#import "ViewController.h"
+#import "MainViewController.h"
 
 @interface AppDelegate ()
 
@@ -20,7 +20,7 @@
     [self setupAppearance];
     
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
-    self.window.rootViewController = [ViewController new];
+    self.window.rootViewController = [MainViewController new];
     [self.window makeKeyAndVisible];
     
     [[WordDB sharedDB] activate];
@@ -52,7 +52,13 @@
 
 - (void)setupAppearance {
     self.window.tintColor = [UIColor whiteColor];
-    [[UINavigationBar appearance] setBarTintColor:RGBCOLOR_HEX(0x2ecc71)];
+    [[UINavigationBar appearance] setBarTintColor:RGBCOLOR_HEX(0x3598DC)];
+    
+    [[UINavigationBar appearance] setTitleTextAttributes:@{ NSForegroundColorAttributeName: [UIColor whiteColor],
+                                                            NSFontAttributeName:[UIFont fontWithName:@"HelveticaNeue-Light" size:20] }];
+    
+    [[UINavigationBar appearance] setBackgroundImage:[[UIImage alloc] init] forBarMetrics:UIBarMetricsDefault];
+
 }
 
 @end

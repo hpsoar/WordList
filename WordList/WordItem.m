@@ -54,6 +54,7 @@
     UILabel *_definitionLabel;
     UIView *_container;
     WordItem *_item;
+    UIImageView *_checkmark;
 }
 
 + (UIFont *)wordFont {
@@ -86,19 +87,19 @@
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         _container = [[UIView alloc] initWithFrame:[self containerRect]];
-        _container.backgroundColor = [UIColor redColor];
         _container.layer.cornerRadius = 8;
         _container.layer.borderColor = [UIColor whiteColor].CGColor;
-        _container.layer.borderWidth = 0.5;
+//        _container.layer.borderWidth = 0.5;
+        _container.backgroundColor = kSelectedColor;
         _container.clipsToBounds = YES;
         [self.contentView addSubview:_container];
         
-        _seperator = [UIView lineWithColor:RGBCOLOR_HEX(0xc8c8c8) width:self.width - 28 height:0.5];
+        _seperator = [UIView lineWithColor:RGBCOLOR_HEX(0xd8d8d8) width:self.width - 28 height:0.5];
         _seperator.centerX = self.width / 2;
         [_container addSubview:_seperator];
         
         _wordLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 10, 0, 0)];
-        _wordLabel.textColor = RGBCOLOR_HEX(0xdcdcdc);
+        _wordLabel.textColor = [UIColor whiteColor];
         _wordLabel.font = [WordItemCell wordFont];
         _wordLabel.left = 14;
         [_container addSubview:_wordLabel];
@@ -110,7 +111,7 @@
         [_container addSubview:_phoneticLabel];
         
         _definitionLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 0, 0, 0)];
-        _definitionLabel.textColor = RGBCOLOR_HEX(0xdcdcdc);
+        _definitionLabel.textColor = [UIColor whiteColor];
         _definitionLabel.numberOfLines = 0;
         _definitionLabel.font = [WordItemCell definitionFont];
         _definitionLabel.left = 14;
@@ -121,6 +122,12 @@
         UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(selectItem)];
         _container.userInteractionEnabled = YES;
         [_container addGestureRecognizer:tap];
+        
+        _checkmark = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"checkmark.png"]];
+        _checkmark.frame = CGRectMake(0, 0, 20, 20);
+        _checkmark.contentMode = UIViewContentModeScaleAspectFit;
+        _checkmark.right = _container.width - 10;
+        [_container addSubview:_checkmark];
         
         self.contentView.backgroundColor = [UIColor clearColor];
         self.backgroundColor = [UIColor clearColor];
@@ -137,7 +144,7 @@
 }
 
 - (CGRect)containerRect {
-    return CGRectMake(5, 0, self.width - 10, self.height - 10);
+    return CGRectMake(5, 2, self.width - 10, self.height - 10);
 }
 
 - (BOOL)shouldUpdateCellWithObject:(id)object {
@@ -147,6 +154,7 @@
     _wordLabel.text = item.word;
     _wordLabel.width = _container.width - 28;
     [_wordLabel sizeToFit];
+    _checkmark.centerY = _wordLabel.centerY;
     
     _seperator.top = _wordLabel.bottom + 5;
     
@@ -167,13 +175,8 @@
         _definitionLabel.top = _seperator.bottom + 10;
     }
     
-    if (item.favored) {
-        _container.backgroundColor = kSelectedColor;
-    }
-    else {
-        _container.backgroundColor = kNormalColor;
-    }
-    
+    _checkmark.hidden = !_item.favored;
+
     [self doLayout];
     
     return YES;

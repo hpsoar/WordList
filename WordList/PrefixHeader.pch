@@ -19,4 +19,6 @@
 
 #import "NIDebuggingTools.h"
 
+#import "NSString+Utility.h"
+
 #endif

@@ -27,8 +27,6 @@
     self = [super initWithFrame:frame];
     if (self) {
         self.layer.cornerRadius = 6;
-        self.layer.borderColor = [UIColor whiteColor].CGColor;
-        self.layer.borderWidth = 0.5;
         self.backgroundColor = RGBCOLOR_HEX(0x4CABED);
         self.clipsToBounds = YES;
 
@@ -36,7 +34,7 @@
         [self addSubview:self.scrollView];
         
         self.wordLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.width, 44)];
-        self.wordLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:32];
+        self.wordLabel.font = [UIFont fontWithName:@"HelveticaNeue-Thin" size:32];
         self.wordLabel.textColor = [UIColor whiteColor];
         self.wordLabel.textAlignment = NSTextAlignmentCenter;
         [self.scrollView addSubview:self.wordLabel];
@@ -135,9 +133,9 @@
     self.markRememberedBtn.right = self.view.width - 10;
     [self.buttonArea addSubview:self.markRememberedBtn];
     
-    self.nextButton = [self buttonWithColor:RGBCOLOR_HEX(0x3498db)
-                                      title:@"下一个"
-                                      width:self.view.width - 20];
+    self.nextButton = [self buttonWithColor:RGBCOLOR_HEX(0xf1c40f)
+                                      title:@"不记得"
+                                      width:140];
     [self.nextButton addTarget:self action:@selector(next:) forControlEvents:UIControlEventTouchUpInside];
     self.nextButton.left = 10;
     [self.buttonArea addSubview:self.nextButton];
@@ -207,12 +205,31 @@
 }
 
 - (void)updateButtonsShowNextButton:(BOOL)showNextButton withTag:(NSInteger)tag {
-    self.nextButton.hidden = !showNextButton;
-    self.markNotRememberedBtn.hidden = showNextButton;
-    self.markRememberedBtn.hidden = showNextButton;
+    CGFloat duration = .3;
     if (showNextButton) {
+        self.nextButton.hidden = NO;
+        self.markNotRememberedBtn.hidden = YES;
         self.nextButton.tag = tag;
-        [self.nextButton setTitle:tag == 1 ? @"下一个": @"再来一组" forState:UIControlStateNormal];
+        [UIView animateWithDuration:duration animations:^{
+            [self.nextButton setTitle:tag == 1 ? @"下一个": @"再来一组" forState:UIControlStateNormal];
+            self.nextButton.width = self.view.width - 20;
+            self.nextButton.backgroundColor = RGBCOLOR_HEX(0x3498db);
+            self.markRememberedBtn.width = 50;
+            self.markRememberedBtn.right = self.view.width - 10;
+        } completion:^(BOOL finished) {
+        }];
+    }
+    else {
+       [UIView animateWithDuration:duration animations:^{
+           [self.nextButton setTitle:@"不记得" forState:UIControlStateNormal];
+           self.nextButton.backgroundColor = RGBCOLOR_HEX(0xf1c40f);
+           self.nextButton.width = 140;
+           self.markRememberedBtn.width = 140;
+           self.markRememberedBtn.right = self.view.width - 10;
+       } completion:^(BOOL finished) {
+           self.nextButton.hidden = YES;
+           self.markNotRememberedBtn.hidden = NO;
+       }];
     }
 }
 
@@ -232,6 +249,7 @@
     btn.layer.cornerRadius = btn.height / 2;
     btn.layer.borderWidth = 0.8;
     btn.layer.borderColor = [UIColor whiteColor].CGColor;
+    btn.clipsToBounds = YES;
     return btn;
 }
 

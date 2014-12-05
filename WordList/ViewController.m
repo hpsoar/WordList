@@ -386,8 +386,9 @@
         _textField.placeholder = @"Enter a word";
         _textField.clearButtonMode = UITextFieldViewModeWhileEditing;
         _textField.returnKeyType = UIReturnKeyDone;
+        _textField.keyboardType = UIKeyboardTypeAlphabet;
         _textField.textColor = [UIColor whiteColor];
-        self.backgroundColor = RGBCOLOR_HEX(0x8B572A);
+        self.backgroundColor = RGBCOLOR_HEX(0x3598DC);
         _textField.delegate = self;
         
         [self addSubview:_textField];
@@ -484,6 +485,8 @@ NSString* const kYoudaokey      = @"482091942";
     [super viewDidLoad];
     
     self.view.backgroundColor = RGBCOLOR_HEX(0x3598DC);
+    
+    [self updateTitle];
     
     self.tableView.backgroundColor = [UIColor clearColor];
     
@@ -593,7 +596,7 @@ NSString* const kYoudaokey      = @"482091942";
 }
 
 - (void)updateTitle {
-    self.title = self.editingView.word == nil ? @"No Word" : self.editingView.editedWord;
+    self.title = self.editingView.word.isEmpty ? @"No Word" : self.editingView.editedWord;
 }
 
 - (void)wordEdittingViewDidEditWord {

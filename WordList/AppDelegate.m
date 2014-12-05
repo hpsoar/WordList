@@ -55,10 +55,11 @@
     [[UINavigationBar appearance] setBarTintColor:RGBCOLOR_HEX(0x3598DC)];
     
     [[UINavigationBar appearance] setTitleTextAttributes:@{ NSForegroundColorAttributeName: [UIColor whiteColor],
-                                                            NSFontAttributeName:[UIFont fontWithName:@"HelveticaNeue-Light" size:20] }];
+                                                            NSFontAttributeName:[UIFont fontWithName:@"HelveticaNeue-Light" size:22] }];
     
     [[UINavigationBar appearance] setBackgroundImage:[[UIImage alloc] init] forBarMetrics:UIBarMetricsDefault];
 
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
 }
 
 @end

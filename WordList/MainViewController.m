@@ -22,6 +22,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.view.backgroundColor = RGBCOLOR_HEX(0x3598DC);
     self.controllers = @[
                          [[CustomNavigationController alloc] initWithRootViewController:[WordListViewController new]],
                          [[CustomNavigationController alloc] initWithRootViewController:[ViewController new]],

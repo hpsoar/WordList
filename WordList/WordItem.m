@@ -9,7 +9,7 @@
 #import "WordItem.h"
 
 @implementation WordItem {
-    Word *_w;
+    WordDefinition *_w;
 }
 
 - (void)setWord:(NSString *)word {

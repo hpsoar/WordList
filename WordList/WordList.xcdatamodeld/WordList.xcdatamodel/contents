@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="6252" systemVersion="14A389" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
+    <entity name="RawWord" representedClassName="RawWord" syncable="YES">
+        <attribute name="rawSource" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="rawState" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="word" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
     <entity name="Review" representedClassName="Review" syncable="YES">
         <attribute name="known_count" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="last_review_time" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
@@ -8,7 +13,7 @@
         <attribute name="successive_known_count" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="unknown_count" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
     </entity>
-    <entity name="Word" representedClassName="Word" syncable="YES">
+    <entity name="WordDefinition" representedClassName="WordDefinition" syncable="YES">
         <attribute name="definitions" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="phonetic" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="ukPhonetic" optional="YES" attributeType="String" syncable="YES"/>
@@ -18,6 +23,7 @@
     </entity>
     <elements>
         <element name="Review" positionX="-54" positionY="-9" width="128" height="133"/>
-        <element name="Word" positionX="-414" positionY="-81" width="128" height="133"/>
+        <element name="WordDefinition" positionX="-414" positionY="-81" width="128" height="133"/>
+        <element name="RawWord" positionX="-396" positionY="119" width="128" height="88"/>
     </elements>
 </model>

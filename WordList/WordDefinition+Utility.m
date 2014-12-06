@@ -6,9 +6,9 @@
 //  Copyright (c) 2014 Beacon. All rights reserved.
 //
 
-#import "Word+Utility.h"
+#import "WordDefinition+Utility.h"
 
-@implementation Word (Utility)
+@implementation WordDefinition (Utility)
 
 - (NSString *)firstLetter {
     return [[self.word substringToIndex:1] uppercaseString];

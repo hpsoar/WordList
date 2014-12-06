@@ -6,9 +6,9 @@
 //  Copyright (c) 2014 Beacon. All rights reserved.
 //
 
-#import "Word.h"
+#import "WordDefinition.h"
 
-@interface Word (Utility)
+@interface WordDefinition (Utility)
 
 @property (nonatomic, readonly) NSString *firstLetter;
 

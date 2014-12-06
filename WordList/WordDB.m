@@ -9,7 +9,7 @@
 #import "WordDB.h"
 #import "Review.h"
 
-static NSString *wordEntityName = @"Word";
+static NSString *wordEntityName = @"WordDefinition";
 static NSString *reviewEntityName = @"Review";
 
 @implementation WordDB {
@@ -37,17 +37,17 @@ static NSString *reviewEntityName = @"Review";
     
 }
 
-- (Word *)insertWord {
-    Word *word = [self insertObjectForEntityWithName:wordEntityName];
+- (WordDefinition*)insertWord {
+    WordDefinition*word = [self insertObjectForEntityWithName:wordEntityName];
     word.review = [self insertObjectForEntityWithName:reviewEntityName];
     return word;
 }
 
-- (void)deleteWord:(Word *)word {
+- (void)deleteWord:(WordDefinition*)word {
     [self deleteObject:word];
 }
 
-- (Word *)word:(NSString *)text {
+- (WordDefinition*)word:(NSString *)text {
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"word = %@", text];
     return [self queryOneFromEntityWithName:wordEntityName withPredicate:predicate];
 }
@@ -125,7 +125,7 @@ static NSString *reviewEntityName = @"Review";
 // > 0 -- yes
 // < 0 -- rest
 // == 0 -- no
-- (BOOL)shouldUpdateStageForWord:(Word *)word {
+- (BOOL)shouldUpdateStageForWord:(WordDefinition*)word {
     NSInteger stage = [word.review.reviewed_count integerValue];
     if (stage == 0) {
         return 1;
@@ -154,7 +154,7 @@ static NSString *reviewEntityName = @"Review";
     return 1;
 }
 
-- (void)scheduleNextReviewTimeForWord:(Word *)word remembered:(BOOL)remembered {
+- (void)scheduleNextReviewTimeForWord:(WordDefinition*)word remembered:(BOOL)remembered {
     NSTimeInterval time = [[NSDate date] timeIntervalSince1970];
   
     word.review.last_review_time = @(time);

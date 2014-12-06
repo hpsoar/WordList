@@ -18,6 +18,7 @@
     [super viewDidLoad];
     
     self.title= @"WORDS";
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addWord)];
     
     self.view.backgroundColor = RGBCOLOR_HEX(0x3598DC);
     self.tableView.top = 64;
@@ -33,6 +34,10 @@
         _fetchedResultsController.delegate = self;
     }
     return _fetchedResultsController;
+}
+
+- (void)addWord {
+    
 }
 
 #pragma mark - Table view data source
@@ -57,7 +62,7 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:identifier];
     }
     
-    Word *word = [self.fetchedResultsController objectAtIndexPath:indexPath];
+    WordDefinition *word = [self.fetchedResultsController objectAtIndexPath:indexPath];
     
     cell.textLabel.text = word.word;
     cell.detailTextLabel.text = [word.definitions stringByReplacingOccurrencesOfString:@"\n" withString:@";"];
@@ -80,7 +85,7 @@
 // Override to support editing the table view.
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
-        Word *word = [self.fetchedResultsController objectAtIndexPath:indexPath];
+        WordDefinition *word = [self.fetchedResultsController objectAtIndexPath:indexPath];
         [[WordDB sharedDB] deleteWord:word];
         
         [[WordDB sharedDB] saveContext];

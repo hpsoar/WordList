@@ -7,7 +7,7 @@
 //
 
 #import "CoreData.h"
-#import "Word.h"
+#import "WordDefinition+Utility.h"
 #import <CoreData/CoreData.h>
 
 @interface WordDB : CoreData
@@ -16,11 +16,11 @@
 
 - (void)activate;
 
-- (Word *)insertWord;
+- (WordDefinition *)insertWord;
 
-- (void)deleteWord:(Word *)word;
+- (void)deleteWord:(WordDefinition *)word;
 
-- (Word *)word:(NSString *)text;
+- (WordDefinition *)word:(NSString *)text;
 
 - (NSFetchRequest *)fetchRequest;
 
@@ -66,6 +66,6 @@
  *          we should be at HH.1, after current review;
  * 4. otherwise, we update as normally;
  */
-- (void)scheduleNextReviewTimeForWord:(Word *)word remembered:(BOOL)remembered;
+- (void)scheduleNextReviewTimeForWord:(WordDefinition *)word remembered:(BOOL)remembered;
 
 @end

@@ -10,8 +10,8 @@
 #define WordList_PrefixHeader_pch
 
 #import "CoreData.h"
-#import "Word+Utility.h"
-#import "WordDB.h"
+#import "WordDefinition+Utility.h"
+#import "WordDB+RawLib.h"
 
 #import "Utility.h"
 #import "UIView+Utility.h"

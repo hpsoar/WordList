@@ -10,7 +10,7 @@
 
 @interface ReviewBoardView : UIView
 @property (nonatomic) BOOL showDefinition;
-@property (nonatomic, strong) Word *word;
+@property (nonatomic, strong) WordDefinition *word;
 @end
 
 @interface ReviewBoardView ()
@@ -51,7 +51,7 @@
     return self;
 }
 
-- (void)setWord:(Word *)word {
+- (void)setWord:(WordDefinition *)word {
     self.showDefinition = NO;
     if (word) {
         _word = word;

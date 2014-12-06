@@ -1,16 +1,16 @@
 //
-//  Word.m
+//  WordDefinition.m
 //  WordList
 //
-//  Created by HuangPeng on 11/30/14.
+//  Created by HuangPeng on 12/6/14.
 //  Copyright (c) 2014 Beacon. All rights reserved.
 //
 
-#import "Word.h"
+#import "WordDefinition.h"
 #import "Review.h"
 
 
-@implementation Word
+@implementation WordDefinition
 
 @dynamic definitions;
 @dynamic phonetic;

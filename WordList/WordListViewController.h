@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "RefreshTableViewController.h"
 
-@interface WordListViewController : UITableViewController
+@interface WordListViewController : RefreshTableViewController
 
 @end

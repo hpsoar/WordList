@@ -22,7 +22,7 @@
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addWord)];
     
     self.view.backgroundColor = RGBCOLOR_HEX(0x3598DC);
-    self.tableView.top = 64;
+    self.tableView.backgroundColor = RGBCOLOR_HEX(0x3598DC);
     
     self.tableView.tableFooterView = [UIView viewWithFrame:CGRectZero andBkColor:nil];
     

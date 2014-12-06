@@ -90,6 +90,7 @@
 		12E1923F1A32C02B0084639E /* toefl.txt in Resources */ = {isa = PBXBuildFile; fileRef = 12E1923E1A32C02B0084639E /* toefl.txt */; };
 		12E192421A33086B0084639E /* DefinitionApi.m in Sources */ = {isa = PBXBuildFile; fileRef = 12E192411A33086B0084639E /* DefinitionApi.m */; };
 		12E192451A330DCC0084639E /* ReviewBoardView.m in Sources */ = {isa = PBXBuildFile; fileRef = 12E192441A330DCC0084639E /* ReviewBoardView.m */; };
+		12E1924A1A336A7E0084639E /* ModelTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 12E192491A336A7E0084639E /* ModelTableViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -271,6 +272,8 @@
 		12E192411A33086B0084639E /* DefinitionApi.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DefinitionApi.m; sourceTree = "<group>"; };
 		12E192431A330DCC0084639E /* ReviewBoardView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReviewBoardView.h; sourceTree = "<group>"; };
 		12E192441A330DCC0084639E /* ReviewBoardView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReviewBoardView.m; sourceTree = "<group>"; };
+		12E192481A336A7E0084639E /* ModelTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModelTableViewController.h; sourceTree = "<group>"; };
+		12E192491A336A7E0084639E /* ModelTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModelTableViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -294,11 +297,11 @@
 		1261A2F61A2385A200B222F5 = {
 			isa = PBXGroup;
 			children = (
-				12C355101A24E2D600B247DF /* OCKit */,
 				1261A3281A2388CB00B222F5 /* Nimbus */,
+				12C355101A24E2D600B247DF /* OCKit */,
+				1261A3001A2385A200B222F5 /* Products */,
 				1261A3011A2385A200B222F5 /* WordList */,
 				1261A31B1A2385A200B222F5 /* WordListTests */,
-				1261A3001A2385A200B222F5 /* Products */,
 			);
 			sourceTree = "<group>";
 		};
@@ -314,35 +317,17 @@
 		1261A3011A2385A200B222F5 /* WordList */ = {
 			isa = PBXGroup;
 			children = (
-				12B879EE1A2B19A800022C70 /* DB */,
-				12B879D71A2ACC7300022C70 /* Resources */,
-				121E92D21A29C4BA00A41E92 /* WordList.entitlements */,
+				12E192471A3363E60084639E /* Views */,
+				12E192461A3363BB0084639E /* Controllers */,
 				1261A3061A2385A200B222F5 /* AppDelegate.h */,
 				1261A3071A2385A200B222F5 /* AppDelegate.m */,
-				1261A3091A2385A200B222F5 /* ViewController.h */,
-				1261A30A1A2385A200B222F5 /* ViewController.m */,
+				12B879EE1A2B19A800022C70 /* DB */,
 				1261A30F1A2385A200B222F5 /* Images.xcassets */,
 				1261A3111A2385A200B222F5 /* LaunchScreen.xib */,
-				1261A3021A2385A200B222F5 /* Supporting Files */,
 				12C355091A24D02B00B247DF /* PrefixHeader.pch */,
-				12C3559A1A24E7AD00B247DF /* WordItem.h */,
-				12C3559B1A24E7AD00B247DF /* WordItem.m */,
-				12C355A51A2637F300B247DF /* WordListViewController.h */,
-				12C355A61A2637F300B247DF /* WordListViewController.m */,
-				12B879E21A2AE0A700022C70 /* ReviewWordViewController.h */,
-				12B879E31A2AE0A700022C70 /* ReviewWordViewController.m */,
-				129387CE1A2F4F2E006AB150 /* UIButton+Utility.h */,
-				129387CF1A2F4F2E006AB150 /* UIButton+Utility.m */,
-				12996B441A32000B006961E7 /* MainViewController.h */,
-				12996B451A32000B006961E7 /* MainViewController.m */,
-				12996B4A1A320A16006961E7 /* CustomNavigationController.h */,
-				12996B4B1A320A16006961E7 /* CustomNavigationController.m */,
-				12E192211A32A9C00084639E /* AddWordViewController.h */,
-				12E192221A32A9C00084639E /* AddWordViewController.m */,
-				12E192401A33086B0084639E /* DefinitionApi.h */,
-				12E192411A33086B0084639E /* DefinitionApi.m */,
-				12E192431A330DCC0084639E /* ReviewBoardView.h */,
-				12E192441A330DCC0084639E /* ReviewBoardView.m */,
+				12B879D71A2ACC7300022C70 /* Resources */,
+				1261A3021A2385A200B222F5 /* Supporting Files */,
+				121E92D21A29C4BA00A41E92 /* WordList.entitlements */,
 			);
 			path = WordList;
 			sourceTree = "<group>";
@@ -429,6 +414,10 @@
 		12B879EE1A2B19A800022C70 /* DB */ = {
 			isa = PBXGroup;
 			children = (
+				12E192401A33086B0084639E /* DefinitionApi.h */,
+				12E192411A33086B0084639E /* DefinitionApi.m */,
+				12C3559A1A24E7AD00B247DF /* WordItem.h */,
+				12C3559B1A24E7AD00B247DF /* WordItem.m */,
 				126AC42C1A24C8FE0053ED98 /* WordList.xcdatamodeld */,
 				12E192391A32B2E10084639E /* RawWord.h */,
 				12E1923A1A32B2E10084639E /* RawWord.m */,
@@ -451,12 +440,18 @@
 		12C355101A24E2D600B247DF /* OCKit */ = {
 			isa = PBXGroup;
 			children = (
+				12C355291A24E3DF00B247DF /* BaseViewController.h */,
+				12C3552A1A24E3DF00B247DF /* BaseViewController.m */,
 				121E92CF1A28C45400A41E92 /* CoreData.h */,
 				121E92D01A28C45400A41E92 /* CoreData.m */,
-				12C355771A24E72200B247DF /* OCTableViewController.h */,
-				12C355781A24E72200B247DF /* OCTableViewController.m */,
 				12C355111A24E2D600B247DF /* Macros.h */,
 				12C355121A24E2D600B247DF /* Macros.m */,
+				12E1921E1A32269D0084639E /* NSString+Utility.h */,
+				12E1921F1A32269D0084639E /* NSString+Utility.m */,
+				12C355771A24E72200B247DF /* OCTableViewController.h */,
+				12C355781A24E72200B247DF /* OCTableViewController.m */,
+				12996B471A320353006961E7 /* OCViewController.h */,
+				12996B481A320353006961E7 /* OCViewController.m */,
 				12C355131A24E2D600B247DF /* RefreshTableViewController.h */,
 				12C355141A24E2D600B247DF /* RefreshTableViewController.m */,
 				12C355151A24E2D600B247DF /* UIImage+BlurredFrame.h */,
@@ -467,12 +462,8 @@
 				12C3551A1A24E2D600B247DF /* UIView+Utility.m */,
 				12C3551B1A24E2D600B247DF /* Utility.h */,
 				12C3551C1A24E2D600B247DF /* Utility.m */,
-				12C355291A24E3DF00B247DF /* BaseViewController.h */,
-				12C3552A1A24E3DF00B247DF /* BaseViewController.m */,
-				12996B471A320353006961E7 /* OCViewController.h */,
-				12996B481A320353006961E7 /* OCViewController.m */,
-				12E1921E1A32269D0084639E /* NSString+Utility.h */,
-				12E1921F1A32269D0084639E /* NSString+Utility.m */,
+				12E192481A336A7E0084639E /* ModelTableViewController.h */,
+				12E192491A336A7E0084639E /* ModelTableViewController.m */,
 			);
 			name = OCKit;
 			path = OCKit/OCKit/Classes;
@@ -563,6 +554,36 @@
 			);
 			name = Models;
 			path = ../nimbus/src/models/src;
+			sourceTree = "<group>";
+		};
+		12E192461A3363BB0084639E /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				12E192211A32A9C00084639E /* AddWordViewController.h */,
+				12E192221A32A9C00084639E /* AddWordViewController.m */,
+				12996B4A1A320A16006961E7 /* CustomNavigationController.h */,
+				12996B4B1A320A16006961E7 /* CustomNavigationController.m */,
+				12996B441A32000B006961E7 /* MainViewController.h */,
+				12996B451A32000B006961E7 /* MainViewController.m */,
+				1261A3091A2385A200B222F5 /* ViewController.h */,
+				1261A30A1A2385A200B222F5 /* ViewController.m */,
+				12C355A51A2637F300B247DF /* WordListViewController.h */,
+				12C355A61A2637F300B247DF /* WordListViewController.m */,
+				12B879E21A2AE0A700022C70 /* ReviewWordViewController.h */,
+				12B879E31A2AE0A700022C70 /* ReviewWordViewController.m */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
+		12E192471A3363E60084639E /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				12E192431A330DCC0084639E /* ReviewBoardView.h */,
+				12E192441A330DCC0084639E /* ReviewBoardView.m */,
+				129387CE1A2F4F2E006AB150 /* UIButton+Utility.h */,
+				129387CF1A2F4F2E006AB150 /* UIButton+Utility.m */,
+			);
+			name = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -700,6 +721,7 @@
 				12C3555F1A24E4CC00B247DF /* NIButtonUtilities.m in Sources */,
 				12C3559C1A24E7AD00B247DF /* WordItem.m in Sources */,
 				12C355911A24E78000B247DF /* NICellBackgrounds.m in Sources */,
+				12E1924A1A336A7E0084639E /* ModelTableViewController.m in Sources */,
 				12C355671A24E4CC00B247DF /* NIInMemoryCache.m in Sources */,
 				12C355711A24E4CC00B247DF /* NIState.m in Sources */,
 				12C355681A24E4CC00B247DF /* NINavigationAppearance.m in Sources */,

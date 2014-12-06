@@ -431,7 +431,7 @@
 
 @end
 
-@interface ViewController () <WordEditingActionViewDelegate, SearchViewDelegate>
+@interface ViewController () <WordEditingActionViewDelegate, SearchViewDelegate, UIActionSheetDelegate>
 @property (nonatomic, strong) WordEditingActionView *editingView;
 
 @property (nonatomic, strong) SearchView *searchView;
@@ -481,6 +481,8 @@
     
     self.view.backgroundColor = RGBCOLOR_HEX(0x3598DC);
     
+    self.automaticallyAdjustsScrollViewInsets = NO;
+    
     [self updateTitle];
     
     self.tableView.backgroundColor = [UIColor clearColor];
@@ -496,6 +498,44 @@
     [self.view addSubview:self.searchView];
     
     self.tableView.tableFooterView = [UIView viewWithFrame:CGRectMake(0, 0, self.view.width, 70) andBkColor:[UIColor clearColor]];
+    
+    self.headerView = [[ActivityView alloc] initWithFrame:CGRectMake(0, 0, self.view.width, 80)];
+    self.headerView.pullHint = @"Pull to show menu";
+    self.headerView.releaseHint = @"Release to show menu";
+    self.headerView.loadingHint = @"";
+}
+
+- (void)refresh {
+    [super refresh];
+    
+    [self refreshCompleted];
+    
+    UIActionSheet *actionSheet = [[UIActionSheet alloc]
+                                  initWithTitle:nil
+                                  delegate:self
+                                  cancelButtonTitle:@"取消"
+                                  destructiveButtonTitle:nil
+                                  otherButtonTitles:@"单词本", @"复习",nil];
+    actionSheet.actionSheetStyle = UIActionSheetStyleBlackOpaque;
+    [actionSheet showInView:self.view];
+}
+
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
+    switch (buttonIndex) {
+        case 0:
+            [self showWordbook];
+            break;
+        case 1:
+            [self reviewWord];
+            break;
+        default:
+            break;
+    }
+}
+
+- (void)reviewWord {
+    ReviewWordViewController *controller = [ReviewWordViewController new];
+    [self.navigationController pushViewController:controller animated:YES];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -532,7 +572,7 @@
 }
 
 - (void)updateTitle {
-    self.title = self.editingView.word.notEmpty ? self.editingView.editedWord : @"No Word";
+    self.title = self.editingView.editedWord.notEmpty ? self.editingView.editedWord : @"No Word";
 }
 
 - (void)wordEdittingViewDidEditWord {
@@ -564,6 +604,7 @@
 }
 
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
+    [super scrollViewWillBeginDragging:scrollView];
     [self.searchView resignFirstResponder];
 }
 

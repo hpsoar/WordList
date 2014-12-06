@@ -7,7 +7,7 @@
 //
 
 #import "AppDelegate.h"
-#import "MainViewController.h"
+#import "ViewController.h"
 
 @interface AppDelegate ()
 
@@ -20,7 +20,7 @@
     [self setupAppearance];
     
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
-    self.window.rootViewController = [MainViewController new];
+    self.window.rootViewController = [[UINavigationController alloc] initWithRootViewController:[ViewController new]];
     [self.window makeKeyAndVisible];
     
     [[WordDB sharedDB] activate];
@@ -59,6 +59,9 @@
                                                             NSFontAttributeName:[UIFont fontWithName:@"HelveticaNeue-Light" size:22] }];
     
     [[UINavigationBar appearance] setBackgroundImage:[[UIImage alloc] init] forBarMetrics:UIBarMetricsDefault];
+    [UINavigationBar appearance].backgroundColor = RGBCOLOR_HEX(0x3598DC);
+    [UINavigationBar appearance].shadowImage = [UIImage new];
+    [UINavigationBar appearance].translucent = NO;
 
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
     [[UIApplication sharedApplication] setStatusBarHidden:NO];

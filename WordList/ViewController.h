@@ -7,9 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "OCTableViewController.h"
+#import "ModelTableViewController.h"
 
-@interface ViewController : OCTableViewController
+@interface ViewController : ModelTableViewController
 
 
 @end

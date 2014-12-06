@@ -42,6 +42,11 @@
     
     [self import:kRawWordSourceGRE file:@"gre.txt"];
     [self import:kRawWordSourceTOEFL file:@"toefl.txt"];
+    
+    /*
+    NSUbiquitousKeyValueStore *store = [NSUbiquitousKeyValueStore defaultStore];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateKeyValuePairs:) name:NSUbiquitousKeyValueStoreDidChangeExternallyNotification object:store];
+     */
 }
 
 - (void)import:(RawWordSource)source file:(NSString *)file {

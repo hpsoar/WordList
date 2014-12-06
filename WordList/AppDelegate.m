@@ -53,6 +53,7 @@
 - (void)setupAppearance {
     self.window.tintColor = [UIColor whiteColor];
     [[UINavigationBar appearance] setBarTintColor:RGBCOLOR_HEX(0x3598DC)];
+    [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
     
     [[UINavigationBar appearance] setTitleTextAttributes:@{ NSForegroundColorAttributeName: [UIColor whiteColor],
                                                             NSFontAttributeName:[UIFont fontWithName:@"HelveticaNeue-Light" size:22] }];

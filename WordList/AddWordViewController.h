@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "RawWord.h"
 
 @interface AddWordViewController : UIViewController
+
+@property (nonatomic) RawWordSource source;
 
 @end

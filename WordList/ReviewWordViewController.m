@@ -7,82 +7,7 @@
 //
 
 #import "ReviewWordViewController.h"
-
-@interface ReviewBoardView : UIView
-@property (nonatomic) BOOL showDefinition;
-@property (nonatomic, strong) WordDefinition *word;
-@end
-
-@interface ReviewBoardView ()
-
-@property (nonatomic, strong) UILabel *wordLabel;
-@property (nonatomic, strong) UILabel *definitionLabel;
-@property (nonatomic, strong) UIScrollView *scrollView;
-
-@end
-
-@implementation ReviewBoardView
-
-- (id)initWithFrame:(CGRect)frame {
-    self = [super initWithFrame:frame];
-    if (self) {
-        self.layer.cornerRadius = 6;
-        self.backgroundColor = RGBCOLOR_HEX(0x4CABED);
-        self.clipsToBounds = YES;
-
-        self.scrollView = [[UIScrollView alloc] initWithFrame:self.bounds];
-        [self addSubview:self.scrollView];
-        
-        self.wordLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.width, 44)];
-        self.wordLabel.font = [UIFont fontWithName:@"HelveticaNeue-Thin" size:32];
-        self.wordLabel.textColor = [UIColor whiteColor];
-        self.wordLabel.textAlignment = NSTextAlignmentCenter;
-        [self.scrollView addSubview:self.wordLabel];
-        
-        self.definitionLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, self.wordLabel.bottom + 5, self.width, 0)];
-        self.definitionLabel.textAlignment = NSTextAlignmentCenter;
-        self.definitionLabel.font = [UIFont fontWithName:@"STHeitiSC-Light" size:22];
-        self.definitionLabel.textColor = [UIColor whiteColor];
-        self.definitionLabel.numberOfLines = 0;
-        [self.scrollView addSubview:self.definitionLabel];
-        
-        self.showDefinition = NO;
-    }
-    return self;
-}
-
-- (void)setWord:(WordDefinition *)word {
-    self.showDefinition = NO;
-    if (word) {
-        _word = word;
-        self.wordLabel.text = word.word;
-    }
-    else {
-        _word = nil;
-        self.wordLabel.text = @"复习完了～～～";
-    }
-}
-
-- (void)setShowDefinition:(BOOL)showDefinition {
-    self.definitionLabel.hidden = !showDefinition;
-    if (showDefinition) {
-        self.definitionLabel.text = _word.definitions;
-        self.definitionLabel.width = self.scrollView.width - 10;
-        [self.definitionLabel sizeToFit];
-        self.definitionLabel.centerX = self.scrollView.width / 2;
-        
-        CGFloat height = self.wordLabel.height + self.definitionLabel.height + 10;
-        CGFloat top = MAX(10, (self.scrollView.height - height) / 2);
-        self.wordLabel.top = top;
-        self.definitionLabel.top = self.wordLabel.bottom + 5;
-    }
-    else {
-        self.wordLabel.center = CGPointMake(self.width / 2, self.height / 2);
-        self.scrollView.contentSize = self.scrollView.bounds.size;
-    }
-}
-
-@end
+#import "ReviewBoardView.h"
 
 @interface ReviewWordViewController ()
 
@@ -115,27 +40,25 @@
     [self.view addSubview:self.reviewBoardView];
     
     self.buttonArea = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.width, 44)];
-    self.reviewBoardView.autoresizingMask = self.reviewBoardView.autoresizingMask;
+    self.buttonArea.autoresizingMask = self.reviewBoardView.autoresizingMask;
     [self.view addSubview:self.buttonArea];
     
     self.buttonArea.top = self.reviewBoardView.bottom + 20;
     
-    self.markNotRememberedBtn = [self buttonWithColor:RGBCOLOR_HEX(0xf1c40f) title:@"不记得" width:140];
+    self.markNotRememberedBtn = [UIButton buttonWithWidth:140 title:@"不记得" hexBackground:0xf1c40f];
     [self.markNotRememberedBtn addTarget:self action:@selector(markNotRemember) forControlEvents:UIControlEventTouchUpInside];
     
     self.markNotRememberedBtn.left = 10;
     [self.buttonArea addSubview:self.markNotRememberedBtn];
     
-    self.markRememberedBtn = [self buttonWithColor:RGBCOLOR_HEX(0x2ecc71) title:@"记得" width:140];
+    self.markRememberedBtn = [UIButton buttonWithWidth:140 title:@"记得" hexBackground:0x2ecc71];
     [self.markRememberedBtn addTarget:self
                                action:@selector(markRemember)
                      forControlEvents:UIControlEventTouchUpInside];
     self.markRememberedBtn.right = self.view.width - 10;
     [self.buttonArea addSubview:self.markRememberedBtn];
     
-    self.nextButton = [self buttonWithColor:RGBCOLOR_HEX(0xf1c40f)
-                                      title:@"不记得"
-                                      width:140];
+    self.nextButton = [UIButton buttonWithWidth:140 title:@"不记得" hexBackground:0xf1c40f];
     [self.nextButton addTarget:self action:@selector(next:) forControlEvents:UIControlEventTouchUpInside];
     self.nextButton.left = 10;
     [self.buttonArea addSubview:self.nextButton];
@@ -234,23 +157,6 @@
 }
 
 - (void)updateButtonFrame {
-}
-
-- (UIButton *)buttonWithColor:(UIColor *)color title:(NSString *)title width:(CGFloat)width {
-    CGFloat height = 56;
-    if (self.view.width > 640) {
-        height = 60;
-    }
-    UIButton *btn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, width, height)];
-    [btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    btn.titleLabel.font = [UIFont systemFontOfSize:24];
-    [btn setTitle:title forState:UIControlStateNormal];
-    btn.backgroundColor = color;
-    btn.layer.cornerRadius = btn.height / 2;
-    btn.layer.borderWidth = 0.8;
-    btn.layer.borderColor = [UIColor whiteColor].CGColor;
-    btn.clipsToBounds = YES;
-    return btn;
 }
 
 - (void)viewWillAppear:(BOOL)animated {

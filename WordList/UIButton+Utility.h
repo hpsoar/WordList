@@ -11,5 +11,7 @@
 @interface UIButton (Utility)
 
 + (UIButton *)buttonWithWidth:(CGFloat)width height:(CGFloat)height title:(NSString *)title hexBackground:(NSInteger)hexColor;
+
++ (UIButton *)buttonWithWidth:(CGFloat)width title:(NSString *)title hexBackground:(NSInteger)hexColor;
     
 @end

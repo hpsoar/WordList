@@ -7,11 +7,11 @@
 //
 
 #import "ViewController.h"
-#import "AFHTTPSessionManager.h"
 #import "WordItem.h"
 #import "WordListViewController.h"
 #import "ReviewWordViewController.h"
 #import "UIButton+Utility.h"
+#import "DefinitionApi.h"
 
 @protocol WordEditingActionViewDelegate <NSObject>
 
@@ -56,14 +56,14 @@
         
         CGFloat bigWidth = (self.width - 3 * _xSpace) / 2;
         self.editButton = [[CollapsableButton alloc] initWithFrame:CGRectMake(_xSpace, 0, bigWidth, _btnWidth)];
-        self.editButton.title = @"EDIT";
+        self.editButton.title = @"Edit";
         self.editButton.collapseToLeft = YES;
         self.editButton.backgroundColor = RGBCOLOR_HEX(0xF1C40F);
         [self addSubview:self.editButton];
         
         
         self.pasteBtn = [[CollapsableButton alloc] initWithFrame:CGRectMake(self.width - bigWidth - _xSpace, 0, bigWidth, _btnWidth)];
-        self.pasteBtn.title = @"PASTE";
+        self.pasteBtn.title = @"Paste";
         self.pasteBtn.collapseToLeft = YES;
         self.pasteBtn.backgroundColor = RGBCOLOR_HEX(0x2ECD71);
         [self addSubview:self.pasteBtn];
@@ -431,15 +431,10 @@
 
 @end
 
-NSString* const kYoudaoKeyFrom  = @"kernelpanic";
-NSString* const kYoudaokey      = @"482091942";
-
 @interface ViewController () <WordEditingActionViewDelegate, SearchViewDelegate>
 @property (nonatomic, strong) WordEditingActionView *editingView;
 
 @property (nonatomic, strong) SearchView *searchView;
-
-@property (nonatomic, strong) AFHTTPSessionManager *httpSession;
 
 @end
 
@@ -526,65 +521,6 @@ NSString* const kYoudaokey      = @"482091942";
     [self.tableView reloadData];
 }
 
--(void)queryYoudao:(NSString*)word {
-    NSString *const kYoudaoURL = @"http://fanyi.youdao.com";
-    
-    if (self.httpSession) {
-        [self.httpSession invalidateSessionCancelingTasks:YES];
-        self.httpSession = nil;
-    }
-    
-    self.httpSession = [[AFHTTPSessionManager alloc] initWithBaseURL:[NSURL URLWithString:kYoudaoURL]];
-    NSDictionary *params = @{ @"keyfrom": kYoudaoKeyFrom,
-                              @"key": kYoudaokey,
-                              @"type": @"data",
-                              @"doctype": @"json",
-                              @"version": @1.1,
-                              @"q": word };
-    [self.httpSession GET:@"openapi.do" parameters:params success:^(NSURLSessionDataTask *task, id responseObject) {
-        NSArray *wordList = [self parseWordList:responseObject];
-        [self updateModelWithWordList:wordList];
-    } failure:^(NSURLSessionDataTask *task, NSError *error) {
-        NSLog(@"%@", error);
-    }];
-}
-
-- (NSArray *)parseWordList:(NSDictionary *)json {
-    NSMutableArray *results = [NSMutableArray new];
-    if ([json[@"errorCode"] integerValue] == 0) {
-        NSString *query = json[@"query"];
-        NSArray *translations = json[@"translation"];
-        NSDictionary *basic = json[@"basic"];
-        NSMutableArray *explains = [basic[@"explains"] mutableCopy];
-        NSString *phontic = basic[@"phonetic"];
-        NSString *ukPhonetic = basic[@"uk-phonetic"];
-        NSString *usPhonetic = basic[@"us-phonetic"];
-        
-        WordItem *item = [WordItem new];
-        item.word = query;
-        item.phonetic = phontic;
-        if (explains.count > 0) {
-            item.definition = [explains componentsJoinedByString:@"\n"];
-        }
-        else {
-            item.definition = [translations componentsJoinedByString:@"\n"];
-        }
-        [results addObject:item];
-        
-        for (NSDictionary *dict in json[@"web"]) {
-            NSString *key = dict[@"key"];
-            NSArray *value = dict[@"value"];
-            WordItem *item = [WordItem new];
-            item.word = key;
-            item.definition = [value componentsJoinedByString:@"\n"];
-            
-            [results addObject:item];
-        }
-    }
-    
-    return results;
-}
-
 - (void)search {
     ReviewWordViewController *controller = [ReviewWordViewController new];
     [self.navigationController pushViewController:controller animated:YES];
@@ -596,13 +532,21 @@ NSString* const kYoudaokey      = @"482091942";
 }
 
 - (void)updateTitle {
-    self.title = self.editingView.word.isEmpty ? @"No Word" : self.editingView.editedWord;
+    self.title = self.editingView.word.notEmpty ? self.editingView.editedWord : @"No Word";
 }
 
 - (void)wordEdittingViewDidEditWord {
+    [self queryWord:self.editingView.editedWord];
+}
+
+- (void)queryWord:(NSString *)word {
     [self updateTitle];
+    
+    [[DefinitionApi sharedApi] query:self.editingView.editedWord success:^(NSArray *results) {
+        [self updateModelWithWordList:results];
+    } failure:^(NSError *error) {
         
-    [self queryYoudao:self.editingView.editedWord];
+    }];
 }
 
 - (void)chooseToSearch {
@@ -616,8 +560,7 @@ NSString* const kYoudaokey      = @"482091942";
 
 - (void)searchTextChanged {
     self.editingView.word = self.searchView.word;
-    [self queryYoudao:self.searchView.word];
-    [self updateTitle];
+    [self queryWord:self.searchView.word];
 }
 
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {

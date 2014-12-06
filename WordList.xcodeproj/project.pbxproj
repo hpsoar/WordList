@@ -88,6 +88,8 @@
 		12E1923B1A32B2E10084639E /* RawWord.m in Sources */ = {isa = PBXBuildFile; fileRef = 12E1923A1A32B2E10084639E /* RawWord.m */; };
 		12E1923D1A32B7DF0084639E /* gre.txt in Resources */ = {isa = PBXBuildFile; fileRef = 12E1923C1A32B7DF0084639E /* gre.txt */; };
 		12E1923F1A32C02B0084639E /* toefl.txt in Resources */ = {isa = PBXBuildFile; fileRef = 12E1923E1A32C02B0084639E /* toefl.txt */; };
+		12E192421A33086B0084639E /* DefinitionApi.m in Sources */ = {isa = PBXBuildFile; fileRef = 12E192411A33086B0084639E /* DefinitionApi.m */; };
+		12E192451A330DCC0084639E /* ReviewBoardView.m in Sources */ = {isa = PBXBuildFile; fileRef = 12E192441A330DCC0084639E /* ReviewBoardView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -265,6 +267,10 @@
 		12E1923A1A32B2E10084639E /* RawWord.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RawWord.m; path = ../RawWord.m; sourceTree = "<group>"; };
 		12E1923C1A32B7DF0084639E /* gre.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = gre.txt; sourceTree = "<group>"; };
 		12E1923E1A32C02B0084639E /* toefl.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = toefl.txt; sourceTree = "<group>"; };
+		12E192401A33086B0084639E /* DefinitionApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DefinitionApi.h; sourceTree = "<group>"; };
+		12E192411A33086B0084639E /* DefinitionApi.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DefinitionApi.m; sourceTree = "<group>"; };
+		12E192431A330DCC0084639E /* ReviewBoardView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReviewBoardView.h; sourceTree = "<group>"; };
+		12E192441A330DCC0084639E /* ReviewBoardView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReviewBoardView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -333,6 +339,10 @@
 				12996B4B1A320A16006961E7 /* CustomNavigationController.m */,
 				12E192211A32A9C00084639E /* AddWordViewController.h */,
 				12E192221A32A9C00084639E /* AddWordViewController.m */,
+				12E192401A33086B0084639E /* DefinitionApi.h */,
+				12E192411A33086B0084639E /* DefinitionApi.m */,
+				12E192431A330DCC0084639E /* ReviewBoardView.h */,
+				12E192441A330DCC0084639E /* ReviewBoardView.m */,
 			);
 			path = WordList;
 			sourceTree = "<group>";
@@ -686,6 +696,7 @@
 				12C355601A24E4CC00B247DF /* NICommonMetrics.m in Sources */,
 				1261A30B1A2385A200B222F5 /* ViewController.m in Sources */,
 				12C355621A24E4CC00B247DF /* NIDebuggingTools.m in Sources */,
+				12E192421A33086B0084639E /* DefinitionApi.m in Sources */,
 				12C3555F1A24E4CC00B247DF /* NIButtonUtilities.m in Sources */,
 				12C3559C1A24E7AD00B247DF /* WordItem.m in Sources */,
 				12C355911A24E78000B247DF /* NICellBackgrounds.m in Sources */,
@@ -728,6 +739,7 @@
 				129387D01A2F4F2E006AB150 /* UIButton+Utility.m in Sources */,
 				1261A3051A2385A200B222F5 /* main.m in Sources */,
 				12C355651A24E4CC00B247DF /* NIFoundationMethods.m in Sources */,
+				12E192451A330DCC0084639E /* ReviewBoardView.m in Sources */,
 				12C355211A24E2D600B247DF /* UIView+Utility.m in Sources */,
 				12C355A71A2637F300B247DF /* WordListViewController.m in Sources */,
 				12E1922C1A32AC3B0084639E /* WordDefinition.m in Sources */,

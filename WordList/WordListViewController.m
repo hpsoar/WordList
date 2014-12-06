@@ -7,8 +7,9 @@
 //
 
 #import "WordListViewController.h"
+#import "AddWordViewController.h"
 
-@interface WordListViewController () <NSFetchedResultsControllerDelegate>
+@interface WordListViewController () <NSFetchedResultsControllerDelegate, UIActionSheetDelegate>
 @property (nonatomic, strong) NSFetchedResultsController *fetchedResultsController;
 @end
 
@@ -22,6 +23,8 @@
     
     self.view.backgroundColor = RGBCOLOR_HEX(0x3598DC);
     self.tableView.top = 64;
+    
+    self.tableView.tableFooterView = [UIView viewWithFrame:CGRectZero andBkColor:nil];
     
     NSError *error;
     [self.fetchedResultsController performFetch:&error];
@@ -37,7 +40,33 @@
 }
 
 - (void)addWord {
-    
+    UIActionSheet *actionSheet = [[UIActionSheet alloc]
+                                  initWithTitle:nil
+                                  delegate:self
+                                  cancelButtonTitle:@"CANCEL"
+                                  destructiveButtonTitle:nil
+                                  otherButtonTitles:@"Add GRE words", @"Add TOEFL words",nil];
+    actionSheet.actionSheetStyle = UIActionSheetStyleBlackOpaque;
+    [actionSheet showInView:self.view];
+}
+
+- (void)addWordFromSource:(RawWordSource)source {
+    AddWordViewController *controller = [AddWordViewController new];
+    controller.source = source;
+    [self.navigationController pushViewController:controller animated:YES];
+}
+
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
+    switch (buttonIndex) {
+        case 0:
+            [self addWordFromSource:kRawWordSourceGRE];
+            break;
+        case 1:
+            [self addWordFromSource:kRawWordSourceTOEFL];
+            break;
+        default:
+            break;
+    }
 }
 
 #pragma mark - Table view data source

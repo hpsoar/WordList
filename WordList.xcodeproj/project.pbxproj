@@ -91,6 +91,7 @@
 		12E192421A33086B0084639E /* DefinitionApi.m in Sources */ = {isa = PBXBuildFile; fileRef = 12E192411A33086B0084639E /* DefinitionApi.m */; };
 		12E192451A330DCC0084639E /* ReviewBoardView.m in Sources */ = {isa = PBXBuildFile; fileRef = 12E192441A330DCC0084639E /* ReviewBoardView.m */; };
 		12E1924A1A336A7E0084639E /* ModelTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 12E192491A336A7E0084639E /* ModelTableViewController.m */; };
+		12E1927F1A3381720084639E /* BlurredOverlay.m in Sources */ = {isa = PBXBuildFile; fileRef = 12E1927E1A3381720084639E /* BlurredOverlay.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -274,6 +275,8 @@
 		12E192441A330DCC0084639E /* ReviewBoardView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReviewBoardView.m; sourceTree = "<group>"; };
 		12E192481A336A7E0084639E /* ModelTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModelTableViewController.h; sourceTree = "<group>"; };
 		12E192491A336A7E0084639E /* ModelTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModelTableViewController.m; sourceTree = "<group>"; };
+		12E1927D1A3381720084639E /* BlurredOverlay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BlurredOverlay.h; sourceTree = "<group>"; };
+		12E1927E1A3381720084639E /* BlurredOverlay.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BlurredOverlay.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -582,6 +585,8 @@
 				12E192441A330DCC0084639E /* ReviewBoardView.m */,
 				129387CE1A2F4F2E006AB150 /* UIButton+Utility.h */,
 				129387CF1A2F4F2E006AB150 /* UIButton+Utility.m */,
+				12E1927D1A3381720084639E /* BlurredOverlay.h */,
+				12E1927E1A3381720084639E /* BlurredOverlay.m */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -751,6 +756,7 @@
 				12C355791A24E72200B247DF /* OCTableViewController.m in Sources */,
 				1261A3451A23890200B222F5 /* AFURLSessionManager.m in Sources */,
 				12996B491A320353006961E7 /* OCViewController.m in Sources */,
+				12E1927F1A3381720084639E /* BlurredOverlay.m in Sources */,
 				12C355201A24E2D600B247DF /* UIImage+ImageEffects.m in Sources */,
 				12E192351A32AEB40084639E /* RawWord+Extension.m in Sources */,
 				1261A3081A2385A200B222F5 /* AppDelegate.m in Sources */,

@@ -31,6 +31,7 @@ NSString* const kYoudaokey      = @"482091942";
 }
 
 - (BOOL)query:(NSString *)query success:(void(^)(NSArray *results))success failure:(void(^)(NSError *error))failure {
+    if (query == nil) return NO;
     [self queryYoudao:query success:success failure:failure];
     return YES;
 }

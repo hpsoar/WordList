@@ -12,6 +12,8 @@
 #import "ReviewWordViewController.h"
 #import "UIButton+Utility.h"
 #import "DefinitionApi.h"
+#import "BlurredOverlay.h"
+#import "UIImage+ImageEffects.h"
 
 @protocol WordEditingActionViewDelegate <NSObject>
 
@@ -436,6 +438,8 @@
 
 @property (nonatomic, strong) SearchView *searchView;
 
+@property (nonatomic, strong) UIView *overlay;
+
 @end
 
 @implementation ViewController
@@ -503,6 +507,24 @@
     self.headerView.pullHint = @"Pull to show menu";
     self.headerView.releaseHint = @"Release to show menu";
     self.headerView.loadingHint = @"";
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    
+    [self updateOverlay];
+}
+
+#define DEFAULT_BLUR_RADIUS 8
+#define DEFAULT_BLUR_TINT_COLOR [UIColor colorWithWhite:0 alpha:.3]
+#define DEFAULT_BLUR_DELTA_FACTOR 1.4
+
+- (void)updateOverlay {
+//    self.overlay.hidden = YES;
+//    UIImage *image = [self.view snapshot];
+//    UIImage *effectImage = [image applyBlurWithRadius:DEFAULT_BLUR_RADIUS tintColor:DEFAULT_BLUR_TINT_COLOR saturationDeltaFactor:DEFAULT_BLUR_DELTA_FACTOR maskImage:nil];
+//    self.overlay.image = effectImage;
+//    self.overlay.hidden = NO;
 }
 
 - (void)refresh {
@@ -584,6 +606,8 @@
     
     [[DefinitionApi sharedApi] query:self.editingView.editedWord success:^(NSArray *results) {
         [self updateModelWithWordList:results];
+        
+        [self updateOverlay];
     } failure:^(NSError *error) {
         
     }];
@@ -606,6 +630,17 @@
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
     [super scrollViewWillBeginDragging:scrollView];
     [self.searchView resignFirstResponder];
+}
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    [super scrollViewDidScroll:scrollView];
+    
+    if (scrollView.contentOffset.y < 0) {
+        [self updateOverlay];
+    }
+    
+    CGFloat alpha = MAX(0, MIN(-scrollView.contentOffset.y / 80, 1.0));
+    self.overlay.alpha = alpha;
 }
 
 @end

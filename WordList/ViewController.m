@@ -507,6 +507,37 @@
     self.headerView.pullHint = @"Pull to show menu";
     self.headerView.releaseHint = @"Release to show menu";
     self.headerView.loadingHint = @"";
+    
+    [self icloudQuery];
+}
+
+- (void)icloudQuery {
+    NSMetadataQuery *query = [[NSMetadataQuery alloc] init];
+    [query setSearchScopes:[NSArray arrayWithObject:
+                            NSMetadataQueryUbiquitousDocumentsScope]];
+    
+    NSPredicate *pred = [NSPredicate predicateWithFormat: @"%K ENDSWITH '.sqlite'",
+                         NSMetadataItemFSNameKey];
+    [query setPredicate:pred];
+    
+    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:NSMetadataItemFSContentChangeDateKey
+                                 ascending:FALSE] ; //means recent first
+    NSArray *sortDescriptors = [NSArray arrayWithObjects:
+                                sortDescriptor,
+                                nil];
+    [query setSortDescriptors:sortDescriptors];
+    
+    [[NSNotificationCenter defaultCenter]
+     addObserver:self
+     selector:@selector(queryDidFinishGathering:)
+     name:NSMetadataQueryDidFinishGatheringNotification
+     object:query];
+    
+    [query startQuery];
+}
+
+- (void)queryDidFinishGathering:(NSNotification *)notification {
+    NIDPRINT(@"%@", notification);
 }
 
 - (void)viewDidAppear:(BOOL)animated {

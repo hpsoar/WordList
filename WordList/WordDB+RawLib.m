@@ -44,6 +44,7 @@ static NSString *rawWordEntityName = @"RawWord";
     }
     NSError *error;
     NSArray *results = [self.managedObjectContext executeFetchRequest:fetchRequest error:&error];
+    // TODO: check for duplicates, remove them, and launch a deduplication process
     if (error) {
         NIDPRINT(@"%@", error);
     }

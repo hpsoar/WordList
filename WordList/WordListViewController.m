@@ -45,7 +45,7 @@
                                   delegate:self
                                   cancelButtonTitle:@"CANCEL"
                                   destructiveButtonTitle:nil
-                                  otherButtonTitles:@"Add GRE words", @"Add TOEFL words",nil];
+                                  otherButtonTitles:@"Add GRE words", @"Add TOEFL words", nil];
     actionSheet.actionSheetStyle = UIActionSheetStyleBlackOpaque;
     [actionSheet showInView:self.view];
 }

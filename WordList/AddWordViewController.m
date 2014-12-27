@@ -52,7 +52,7 @@
 }
 
 - (void)updateData {
-    self.undeterminedRawWords = [[[WordDB sharedDB] wordsWithState:kRawWordStateUndetermined source:self.source limit:20] mutableCopy];
+    self.undeterminedRawWords = [[[WordDB sharedDB] wordsWithState:kRawWordStateUndetermined source:self.source limit:30] mutableCopy];
     
     if (self.undeterminedRawWords.count > 0) {
         [self showNext];
